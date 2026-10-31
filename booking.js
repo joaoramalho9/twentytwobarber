@@ -12,7 +12,7 @@ const DEMO_CONFIG = {
   phone: '',
   address: '',
   daysAhead: 21,
-  closedWeekdays: [0],
+  closedWeekdays: [0, 1],
   services: [
     { id: 'corte', name: 'Corte', minutes: 30, price: '' },
     { id: 'fade', name: 'Fade', minutes: 30, price: '' },
