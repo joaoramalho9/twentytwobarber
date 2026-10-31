@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Twenty Two Barbershop</title>
-  <meta name="description" content="Twenty Two Barbershop — cortes, fades e barba. Marcações pelo Instagram @twentytwo_22barber.">
+  <meta name="description" content="Twenty Two Barbershop — cortes, fades e barba. Marca online o teu corte.">
   <meta property="og:title" content="Twenty Two Barbershop">
-  <meta property="og:description" content="Cortes, fades e barba. Marca já pelo Instagram @twentytwo_22barber.">
+  <meta property="og:description" content="Cortes, fades e barba. Marca online o teu corte.">
   <meta property="og:image" content="assets/logo.jpg">
   <meta name="theme-color" content="#0a0a0a">
   <link rel="icon" href="assets/logo.jpg">
@@ -21,8 +21,8 @@
     <a class="nav__brand" href="#top"><img src="assets/logo.jpg" alt="" width="36" height="36"> Twenty Two</a>
     <nav class="nav__links">
       <a href="#servicos">Serviços</a>
-      <a href="#marcacoes">Marcações</a>
-      <a class="btn btn--small" href="https://www.instagram.com/twentytwo_22barber/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.instagram.com/twentytwo_22barber/" target="_blank" rel="noopener">Instagram</a>
+      <a class="btn btn--small" href="#marcacoes">Marcar</a>
     </nav>
   </header>
 
@@ -33,7 +33,7 @@
       <p class="hero__sub">BARBERSHOP</p>
       <p class="hero__lead">Cortes clássicos, fades limpos e barba ao detalhe.</p>
       <div class="hero__cta">
-        <a class="btn" href="https://ig.me/m/twentytwo_22barber" target="_blank" rel="noopener">Marcar por mensagem</a>
+        <a class="btn" href="#marcacoes">Marcar agora</a>
         <a class="btn btn--ghost" href="https://www.instagram.com/twentytwo_22barber/" target="_blank" rel="noopener">@twentytwo_22barber</a>
       </div>
     </section>
@@ -48,13 +48,15 @@
         <li><h3>Barba</h3><p>Desenho, aparo e toalha quente.</p></li>
         <li><h3>Corte + Barba</h3><p>O pacote completo.</p></li>
       </ul>
-      <p class="note">Preços e disponibilidade: envia mensagem no Instagram.</p>
+      <p class="note">Vê a duração e o preço de cada serviço ao marcar.</p>
     </section>
 
     <section id="marcacoes" class="section section--accent">
       <h2>Marcações</h2>
-      <p>As marcações são feitas por mensagem direta no Instagram. Vê os últimos trabalhos e reserva o teu lugar.</p>
-      <a class="btn" href="https://ig.me/m/twentytwo_22barber" target="_blank" rel="noopener">Enviar mensagem</a>
+      <p>Escolhe o serviço, o dia e a hora. A marcação fica logo registada e recebes confirmação por email.</p>
+      <div class="booking" id="booking">
+        <p class="booking__empty">As marcações online estarão disponíveis em breve.</p>
+      </div>
     </section>
   </main>
 
@@ -62,6 +64,20 @@
     <p>© <span id="year"></span> Twenty Two Barbershop · <a href="https://www.instagram.com/twentytwo_22barber/" target="_blank" rel="noopener">@twentytwo_22barber</a></p>
   </footer>
 
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script>
+    // Link da página de marcações do Google Calendar (Agendamentos).
+    // Google Calendar > Criar > Agenda de marcações > Partilhar > copiar o link
+    // (formato https://calendar.google.com/calendar/appointments/schedules/...).
+    const BOOKING_URL = '';
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    if (BOOKING_URL) {
+      const src = BOOKING_URL + (BOOKING_URL.includes('?') ? '&' : '?') + 'gv=true';
+      document.getElementById('booking').innerHTML =
+        '<iframe src="' + src + '" title="Marcações Twenty Two Barbershop" loading="lazy"></iframe>' +
+        '<a class="btn btn--ghost booking__open" href="' + BOOKING_URL + '" target="_blank" rel="noopener">Abrir numa nova janela</a>';
+    }
+  </script>
 </body>
 </html>
