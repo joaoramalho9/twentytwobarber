@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Twenty Two Barbershop</title>
+  <meta name="description" content="Twenty Two Barbershop — cortes, fades e barba. Marcações pelo Instagram @twentytwo_22barber.">
+  <meta property="og:title" content="Twenty Two Barbershop">
+  <meta property="og:description" content="Cortes, fades e barba. Marca já pelo Instagram @twentytwo_22barber.">
+  <meta property="og:image" content="assets/logo.jpg">
+  <meta name="theme-color" content="#0a0a0a">
+  <link rel="icon" href="assets/logo.jpg">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;600&family=Mr+Dafoe&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="nav">
+    <a class="nav__brand" href="#top"><img src="assets/logo.jpg" alt="" width="36" height="36"> Twenty Two</a>
+    <nav class="nav__links">
+      <a href="#servicos">Serviços</a>
+      <a href="#marcacoes">Marcações</a>
+      <a class="btn btn--small" href="https://www.instagram.com/twentytwo_22barber/" target="_blank" rel="noopener">Instagram</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <img class="hero__logo" src="assets/logo.jpg" alt="Logótipo Twenty Two Barbershop" width="260" height="260">
+      <h1 class="hero__title">TWENTY<span class="script">two</span></h1>
+      <p class="hero__sub">BARBERSHOP</p>
+      <p class="hero__lead">Cortes clássicos, fades limpos e barba ao detalhe.</p>
+      <div class="hero__cta">
+        <a class="btn" href="https://ig.me/m/twentytwo_22barber" target="_blank" rel="noopener">Marcar por mensagem</a>
+        <a class="btn btn--ghost" href="https://www.instagram.com/twentytwo_22barber/" target="_blank" rel="noopener">@twentytwo_22barber</a>
+      </div>
+    </section>
+
+    <div class="pole" aria-hidden="true"></div>
+
+    <section id="servicos" class="section">
+      <h2>Serviços</h2>
+      <ul class="services">
+        <li><h3>Corte</h3><p>Corte à tesoura ou máquina, ajustado ao teu estilo.</p></li>
+        <li><h3>Fade</h3><p>Low, mid ou high fade com acabamento perfeito.</p></li>
+        <li><h3>Barba</h3><p>Desenho, aparo e toalha quente.</p></li>
+        <li><h3>Corte + Barba</h3><p>O pacote completo.</p></li>
+      </ul>
+      <p class="note">Preços e disponibilidade: envia mensagem no Instagram.</p>
+    </section>
+
+    <section id="marcacoes" class="section section--accent">
+      <h2>Marcações</h2>
+      <p>As marcações são feitas por mensagem direta no Instagram. Vê os últimos trabalhos e reserva o teu lugar.</p>
+      <a class="btn" href="https://ig.me/m/twentytwo_22barber" target="_blank" rel="noopener">Enviar mensagem</a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© <span id="year"></span> Twenty Two Barbershop · <a href="https://www.instagram.com/twentytwo_22barber/" target="_blank" rel="noopener">@twentytwo_22barber</a></p>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

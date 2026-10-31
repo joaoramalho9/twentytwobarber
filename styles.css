@@ -1,0 +1,117 @@
+:root {
+  --bg: #0a0a0a;
+  --surface: #141414;
+  --grey: #a7a5a4;
+  --text: #f2f2f2;
+  --muted: #8a8a8a;
+  --neon: #e4ff3a;
+  --radius: 14px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", system-ui, sans-serif;
+  line-height: 1.6;
+}
+a { color: inherit; }
+img { max-width: 100%; display: block; }
+
+/* Nav */
+.nav {
+  position: sticky; top: 0; z-index: 10;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; padding: .75rem 1rem;
+  background: rgba(10,10,10,.85);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid #1f1f1f;
+}
+.nav__brand {
+  display: flex; align-items: center; gap: .5rem;
+  font-family: "Archivo Black", sans-serif; text-decoration: none; letter-spacing: .05em;
+}
+.nav__brand img { border-radius: 50%; }
+.nav__links { display: flex; align-items: center; gap: 1rem; }
+.nav__links a { text-decoration: none; color: var(--grey); font-weight: 600; font-size: .95rem; }
+.nav__links a:hover { color: var(--neon); }
+
+/* Buttons */
+.btn {
+  display: inline-block; padding: .85rem 1.5rem;
+  background: var(--neon); color: #0a0a0a !important;
+  border: 2px solid var(--neon); border-radius: 999px;
+  font-weight: 600; text-decoration: none;
+  transition: transform .15s, box-shadow .15s;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 0 24px rgba(228,255,58,.45); }
+.btn--ghost { background: transparent; color: var(--neon) !important; }
+.btn--small { padding: .4rem 1rem; font-size: .85rem; }
+
+/* Hero */
+.hero {
+  min-height: calc(100vh - 62px);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 3rem 1rem;
+  background: radial-gradient(circle at 50% 35%, #1b1b1b 0%, var(--bg) 60%);
+}
+.hero__logo {
+  width: min(260px, 60vw); height: auto; border-radius: 50%;
+  box-shadow: 0 0 0 3px #222, 0 0 60px rgba(228,255,58,.15);
+  margin-bottom: 2rem;
+}
+.hero__title {
+  position: relative; margin: 0;
+  font-family: "Archivo Black", sans-serif; font-weight: 400;
+  font-size: clamp(3rem, 13vw, 7.5rem); line-height: 1;
+  color: var(--grey); letter-spacing: -.01em;
+}
+.script {
+  position: absolute; right: -.1em; bottom: -.45em;
+  font-family: "Mr Dafoe", cursive; font-size: .75em;
+  color: var(--neon); text-shadow: 0 0 18px rgba(228,255,58,.6);
+  transform: rotate(-8deg);
+}
+.hero__sub { margin: 1.2rem 0 0; font-weight: 600; letter-spacing: .5em; font-size: .9rem; }
+.hero__lead { color: var(--muted); max-width: 32rem; margin: 1.5rem auto 2rem; }
+.hero__cta { display: flex; flex-wrap: wrap; gap: .75rem; justify-content: center; }
+
+/* Barber pole divider */
+.pole {
+  height: 14px;
+  background: repeating-linear-gradient(-45deg, #fff 0 14px, #111 14px 28px);
+  animation: pole 1.2s linear infinite;
+  background-size: 39.6px 14px;
+}
+@keyframes pole { to { background-position: 39.6px 0; } }
+@media (prefers-reduced-motion: reduce) { .pole { animation: none; } }
+
+/* Sections */
+.section { max-width: 960px; margin: 0 auto; padding: 5rem 1rem; text-align: center; }
+.section h2 {
+  font-family: "Archivo Black", sans-serif; font-weight: 400;
+  font-size: clamp(2rem, 6vw, 3rem); margin: 0 0 2rem; color: var(--grey);
+}
+.services {
+  list-style: none; padding: 0; margin: 0;
+  display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+.services li {
+  background: var(--surface); border: 1px solid #222; border-radius: var(--radius);
+  padding: 1.5rem; text-align: left; transition: border-color .2s;
+}
+.services li:hover { border-color: var(--neon); }
+.services h3 { margin: 0 0 .5rem; color: var(--neon); }
+.services p { margin: 0; color: var(--muted); }
+.note { color: var(--muted); margin-top: 2rem; font-size: .9rem; }
+
+.section--accent p { color: var(--muted); max-width: 34rem; margin: 0 auto 2rem; }
+
+.footer { border-top: 1px solid #1f1f1f; padding: 2rem 1rem; text-align: center; color: var(--muted); font-size: .85rem; }
+.footer a { color: var(--neon); text-decoration: none; }
+
+@media (max-width: 520px) {
+  .nav__links a:not(.btn) { display: none; }
+}
