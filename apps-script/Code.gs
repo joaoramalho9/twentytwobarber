@@ -15,7 +15,7 @@ const CONFIG = {
   TIME_ZONE: 'Europe/Lisbon',
   PHONE: '',                       // ex: '+351 912 345 678' (aparece no email)
   ADDRESS: '',                     // morada (aparece no evento e no email)
-  NOTIFY_EMAIL: '',                // email que recebe aviso de cada marcação (vazio = dono do script)
+  NOTIFY_EMAIL: 'ramalho.jp2004@gmail.com',// email que recebe aviso de cada marcação (vazio = dono do script)
   WEB_APP_URL: '',                 // opcional: URL /exec da Web App (se vazio é detetado)
 
   DAYS_AHEAD: 21,                  // até quantos dias à frente se pode marcar
