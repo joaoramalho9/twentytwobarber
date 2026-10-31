@@ -53,9 +53,58 @@
 
     <section id="marcacoes" class="section section--accent">
       <h2>Marcações</h2>
-      <p>Escolhe o serviço, o dia e a hora. A marcação fica logo registada e recebes confirmação por email.</p>
-      <div class="booking" id="booking">
-        <p class="booking__empty">As marcações online estarão disponíveis em breve.</p>
+      <p>Escolhe o serviço, o dia e a hora. Recebes logo a confirmação por email.</p>
+
+      <div class="bk" id="booking">
+        <p class="bk__demo" id="bk-demo-banner" hidden>Modo demonstração — as marcações ainda não são guardadas.</p>
+        <ol class="bk__progress" aria-hidden="true"><li>Serviço</li><li>Dia e hora</li><li>Dados</li><li>Confirmado</li></ol>
+
+        <div class="bk__step" data-step="1">
+          <h3 class="bk__title">Escolhe o serviço</h3>
+          <div class="bk__services" id="bk-services">A carregar…</div>
+        </div>
+
+        <div class="bk__step" data-step="2" hidden>
+          <button class="bk__back" type="button" data-back="1">← Voltar</button>
+          <h3 class="bk__title">Dia e hora <span class="bk__tag" id="bk-chosen-service"></span></h3>
+          <div class="bk__dates" id="bk-dates"></div>
+          <p class="bk__msg" id="bk-slots-msg"></p>
+          <div class="bk__slots" id="bk-slots"></div>
+        </div>
+
+        <div class="bk__step" data-step="3" hidden>
+          <button class="bk__back" type="button" data-back="2">← Voltar</button>
+          <h3 class="bk__title">Os teus dados</h3>
+          <p class="bk__summary" id="bk-summary"></p>
+          <form class="bk__form" id="bk-form">
+            <label>Nome<input name="name" autocomplete="name" required minlength="2" maxlength="80"></label>
+            <label>Email<input name="email" type="email" autocomplete="email" required maxlength="120"></label>
+            <label>Telemóvel<input name="phone" type="tel" autocomplete="tel" required pattern="[+0-9][0-9 \-]{6,}" maxlength="30"></label>
+            <label class="bk__hp" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off"></label>
+            <p class="bk__error" id="bk-error" role="alert"></p>
+            <button class="btn" type="submit">Confirmar marcação</button>
+          </form>
+        </div>
+
+        <div class="bk__step" data-step="4" hidden>
+          <div class="bk__card">
+            <div class="bk__check" aria-hidden="true">✓</div>
+            <p class="bk__ok">Marcação confirmada!</p>
+            <dl>
+              <dt>Nome</dt><dd id="bk-c-name"></dd>
+              <dt>Data / hora</dt><dd id="bk-c-when"></dd>
+              <dt>Serviço</dt><dd id="bk-c-service"></dd>
+            </dl>
+            <p class="bk__muted">Adiciona ao teu calendário:</p>
+            <a class="bk__cal" id="bk-c-google" target="_blank" rel="noopener">Google Calendar</a>
+            <a class="bk__cal" id="bk-c-ics" download="marcacao.ics">Outlook, iCal, outros</a>
+            <p class="bk__muted" id="bk-c-cancel" hidden>Precisas de cancelar? <a target="_blank" rel="noopener">Cancelar marcação</a></p>
+            <p class="bk__muted" id="bk-c-help" hidden>Precisas de ajuda? <a></a></p>
+            <p class="bk__muted" id="bk-c-email">Enviámos-te um email com estes detalhes.</p>
+            <p class="bk__demo" id="bk-c-demo" hidden>Demonstração: esta marcação não foi guardada.</p>
+          </div>
+          <button class="btn btn--ghost" type="button" id="bk-again">Nova marcação</button>
+        </div>
       </div>
     </section>
   </main>
@@ -64,20 +113,7 @@
     <p>© <span id="year"></span> Twenty Two Barbershop · <a href="https://www.instagram.com/twentytwo_22barber/" target="_blank" rel="noopener">@twentytwo_22barber</a></p>
   </footer>
 
-  <script>
-    // Link da página de marcações do Google Calendar (Agendamentos).
-    // Google Calendar > Criar > Agenda de marcações > Partilhar > copiar o link
-    // (formato https://calendar.google.com/calendar/appointments/schedules/...).
-    const BOOKING_URL = '';
-
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    if (BOOKING_URL) {
-      const src = BOOKING_URL + (BOOKING_URL.includes('?') ? '&' : '?') + 'gv=true';
-      document.getElementById('booking').innerHTML =
-        '<iframe src="' + src + '" title="Marcações Twenty Two Barbershop" loading="lazy"></iframe>' +
-        '<a class="btn btn--ghost booking__open" href="' + BOOKING_URL + '" target="_blank" rel="noopener">Abrir numa nova janela</a>';
-    }
-  </script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script src="booking.js"></script>
 </body>
 </html>
