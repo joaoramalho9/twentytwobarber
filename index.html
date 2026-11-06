@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#000000"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Twenty Two"><link rel="manifest" href="manifest.json"><link rel="apple-touch-icon" href="assets/icon-192.png"><link rel="icon" href="assets/icon-192.png"><title>Twenty Two Barbershop</title><template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#000"></rect><text x="50" y="64" text-anchor="middle" font-family="Arial Narrow,Arial,sans-serif" font-weight="800" font-size="40" fill="#e8f23a">22</text></svg></template><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet"><style>*{box-sizing:border-box}html,body{overscroll-behavior:none}body{margin:0;background:#0a0a0b;-webkit-tap-highlight-color:transparent;color:#f4f4f2;font-family:'Barlow',system-ui,sans-serif}a{color:#e8f23a}a:hover{color:#f3f98a}::-webkit-scrollbar{display:none}button,input{font-family:inherit}button:disabled{cursor:not-allowed}:focus-visible{outline:2px solid #e8f23a;outline-offset:2px}input::placeholder{color:#55575b}</style></helmet>
+<div style="min-height:100dvh;display:flex;flex-wrap:wrap;flex-direction:{{ outerDir }};align-items:center;justify-content:center;gap:{{ outerGap }};padding:{{ outerPad }}">
+  <sc-if value="{{ isDesk }}" hint-placeholder-val="{{ false }}">
+    <div style="width:100%;height:68px;flex:none;border-bottom:1px solid #1c1d1f;background:#000;display:flex;align-items:center;justify-content:center;position:relative">
+      <div style="position:absolute;top:0;left:0;right:0;height:4px;background:repeating-linear-gradient(135deg,#d8262f 0 9px,#f4f4f2 9px 18px,#2340a8 18px 27px,#f4f4f2 27px 36px)"></div>
+      <div style="width:min(100%, 1040px);padding:0 24px;display:flex;align-items:center;justify-content:space-between;gap:20px">
+        <button onClick="{{ deskHome }}" style="display:flex;align-items:center;gap:12px;border:none;background:none;cursor:pointer;color:#f4f4f2;padding:0">
+          <img src="assets/logo.png" alt="" style="width:40px;height:40px;border-radius:50%">
+          <span style="font:800 24px/1 'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.02em">Twenty Two <span style="color:#e8f23a">Barbershop</span></span>
+        </button>
+        <div style="display:flex;align-items:center;gap:6px">
+          <sc-if value="{{ showTabs }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;gap:4px">
+              <sc-for list="{{ tabs }}" as="tb" hint-placeholder-count="3">
+                <button onClick="{{ tb.onClick }}" style="height:40px;padding:0 16px;border-radius:10px;border:none;background:{{ tb.deskBg }};color:{{ tb.color }};font:700 17px 'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.04em;cursor:pointer" style-hover="color:#f4f4f2">{{ tb.label }}</button>
+              </sc-for>
+            </div>
+            <button onClick="{{ deskBook }}" style="height:40px;padding:0 18px;margin-left:8px;border-radius:10px;border:none;background:#e8f23a;color:#000;font:800 17px 'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.04em;cursor:pointer" style-hover="background:#f0f86a">Marcar corte</button>
+          </sc-if>
+          <button onClick="{{ toggleFramed }}" style="height:40px;padding:0 14px;margin-left:8px;border-radius:10px;border:1px solid #26282b;background:none;color:#f4f4f2;font:700 15px 'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.04em;cursor:pointer">Ver no telemóvel</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+  <sc-if value="{{ showPanel }}" hint-placeholder-val="{{ true }}">
+  <div style="max-width:300px;display:flex;flex-direction:column;gap:18px">
+    <button onClick="{{ toggleFramed }}" style="align-self:flex-start;height:36px;padding:0 12px;border-radius:9px;border:1px solid #26282b;background:none;color:#f4f4f2;font-size:13px;font-weight:600;cursor:pointer">← Versão para computador</button>
+    <div style="display:flex;align-items:center;gap:14px">
+      <img src="assets/logo.png" alt="Twenty Two Barbershop" style="width:72px;height:72px;border-radius:50%;border:1px solid #26282b">
+      <div style="font:800 34px/0.95 'Barlow Condensed',sans-serif;text-transform:uppercase">Twenty Two<br><span style="color:#e8f23a">App</span></div>
+    </div>
+    <p style="margin:0;font-size:14px;line-height:1.55;color:#9a9ca0;text-wrap:pretty">Uma só app. Em "Iniciar sessão", os barbeiros (<span style="color:#f4f4f2">filipe.bessa22</span>, <span style="color:#f4f4f2">samu22barber</span>) entram e abrem a agenda; cliente de teste: <span style="color:#f4f4f2">2222 / 2222</span>; os clientes entram com o número ou email e veem só a parte deles. As marcações feitas como cliente aparecem na agenda do barbeiro. Pagamento na barbearia, no dia.</p>
+    <button onClick="{{ restart }}" style="align-self:flex-start;border:none;background:none;padding:0;color:#e8f23a;font-size:14px;font-weight:600;cursor:pointer">Recomeçar desde o início</button>
+    <div style="display:flex;flex-direction:column;gap:10px;border-top:1px solid #26282b;padding-top:18px">
+      <div style="font:700 13px 'Barlow Condensed',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#9a9ca0">Notificações</div>
+      <button onClick="{{ simReminder }}" disabled="{{ noReminder }}" style="align-self:flex-start;height:40px;padding:0 14px;border-radius:10px;border:1px solid #e8f23a;background:none;color:#e8f23a;font:700 15px 'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.04em;cursor:pointer;opacity:{{ simOp }}">Simular lembrete 24 h antes</button>
+      <button onClick="{{ simBarber }}" style="align-self:flex-start;height:40px;padding:0 14px;border-radius:10px;border:1px solid #e8f23a;background:none;color:#e8f23a;font:700 15px 'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.04em;cursor:pointer">Simular próximo corte (barbeiro)</button>
+      <sc-if value="{{ hasEmail }}" hint-placeholder-val="{{ false }}">
+        <div style="font-size:12px;color:#9a9ca0">Email enviado para <span style="color:#f4f4f2">{{ lastEmail.to }}</span> · <span style="color:#f4f4f2">{{ lastEmail.subject }}</span></div>
+        <div style="border-radius:12px;background:#000;border:1px solid #26282b;padding:0 0 14px;overflow:hidden;font-family:Arial,Helvetica,sans-serif">
+          <div style="background:#111214;margin:0 10px">
+            <div style="height:5px;background:repeating-linear-gradient(135deg,#d8262f 0 9px,#f4f4f2 9px 18px,#2340a8 18px 27px,#f4f4f2 27px 36px)"></div>
+            <div style="padding:20px 16px 16px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px">
+              <div style="font-size:21px;font-weight:700;color:#e8f23a">{{ lastEmail.headline }}</div>
+              <div style="font-size:14px;color:#f4f4f2">{{ lastEmail.hello }}</div>
+              <div style="font-size:13px;color:#9a9ca0">{{ lastEmail.intro }}</div>
+            </div>
+            <div style="padding:0 16px;display:flex;flex-direction:column;border-top:1px solid #26282b">
+              <sc-for list="{{ lastEmail.rows }}" as="r" hint-placeholder-count="5"><div style="display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid #26282b;font-size:12px"><span style="color:#9a9ca0">{{ r.k }}</span><span style="font-weight:700;color:#f4f4f2;text-align:right">{{ r.v }}</span></div></sc-for>
+            </div>
+            <div style="padding:16px;display:flex;flex-direction:column;gap:8px">
+              <a href="{{ lastEmail.gcal }}" target="_blank" rel="noopener" style="height:42px;border-radius:7px;background:#e8f23a;color:#000;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;text-decoration:none">Adicionar ao Google Calendar</a>
+              <sc-if value="{{ lastEmail.canCancel }}" hint-placeholder-val="{{ true }}"><button onClick="{{ emailCancel }}" style="height:42px;border-radius:7px;border:1.5px solid #e8f23a;background:none;color:#e8f23a;font:700 13px Arial,Helvetica,sans-serif;cursor:pointer">Cancelar marcação</button></sc-if>
+              <div style="font-size:11px;color:#9a9ca0;text-align:center">Para Outlook ou Apple Calendar, abre o ficheiro em anexo.</div>
+            </div>
+          </div>
+          <div style="padding-top:12px;text-align:center;font-size:11px;color:#9a9ca0">Twenty Two Barbershop · <a href="https://www.instagram.com/twentytwo_22barber/" target="_blank" rel="noopener" style="color:#e8f23a;text-decoration:none">Instagram</a></div>
+        </div>
+        <button onClick="{{ emailIcs }}" style="align-self:flex-start;display:flex;align-items:center;gap:8px;border:none;background:none;padding:0;color:#9a9ca0;font-size:12px;cursor:pointer"><span style="width:12px;height:15px;border-radius:2px;background:#4a86e8"></span><span style="color:#f4f4f2">{{ lastEmail.file }}</span><span style="color:#e8f23a">Transferir</span></button>
+      </sc-if>
+    </div>
+  </div>
+
+  </sc-if>
+  <div style="position:relative;width:{{ frameW }};height:{{ frameH }};flex:none;border-radius:{{ frameR }};border:{{ frameB }};background:#000;overflow:hidden;box-shadow:{{ frameShadow }};display:flex;flex-direction:column">
+    <div style="position:absolute;top:0;left:0;right:0;height:5px;display:{{ stripeDisp }};background:repeating-linear-gradient(135deg,#d8262f 0 9px,#f4f4f2 9px 18px,#2340a8 18px 27px,#f4f4f2 27px 36px);z-index:2"></div>
+    <sc-if value="{{ showFakeStatus }}" hint-placeholder-val="{{ true }}">
+    <div style="height:50px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:8px 30px 0;font-size:15px;font-weight:600">
+      <span>9:41</span>
+      <div style="position:absolute;left:50%;top:11px;transform:translateX(-50%);width:118px;height:33px;border-radius:20px;background:#000;box-shadow:0 0 0 1px #1c1d1f"></div>
+      <span style="width:25px;height:12px;border-radius:3px;border:1.5px solid #f4f4f2;padding:1px;display:flex"><span style="width:70%;background:#f4f4f2;border-radius:1px"></span></span>
+    </div>
+    </sc-if>
+    <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}"><div style="height:max(env(safe-area-inset-top), 14px);flex:none"></div></sc-if>
+
+    <sc-if value="{{ isWelcome }}" hint-placeholder-val="{{ true }}">
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 26px 36px;gap:22px;text-align:center">
+        <img src="assets/logo.png" alt="Twenty Two Barbershop" style="width:190px;height:190px;border-radius:50%;border:1px solid #26282b">
+        <div style="font:800 54px/0.92 'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.005em">Marca o<br>teu corte</div>
+        <p style="margin:0;font-size:16px;color:#9a9ca0;max-width:280px">Escolhe o serviço, o barbeiro, o dia e a hora. Fica logo confirmado.</p>
+        <div style="flex:1"></div>
+        <div style="align-self:stretch;display:flex;flex-direction:column;gap:10px">
+          <button onClick="{{ goDetails }}" style="height:56px;border:none;border-radius:12px;background:#e8f23a;color:#000;font:800 20px 'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.04em;cursor:pointer" style-hover="background:#f0f86a" style-active="transform:scale(.98)">Criar conta</button>
+          <button onClick="{{ goLogin }}" style="height:56px;border-radius:12px;border:1px solid #3a3c40;background:none;color:#f4f4f2;font:800 20px 'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.04em;cursor:pointer" style-hover="border-color:#f4f4f2">Iniciar sessão</button>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isDetails }}" hint-placeholder-val="{{ false }}">
+      <div style="flex:1;overflow-y:auto;display:flex;flex-direction:column;padding:8px 24px 36px;gap:20px">
+        <button onClick="{{ goWelcome }}" style="width:42px;height:42px;border-radius:10px;border:1px solid #26282b;background:#111214;color:#f4f4f2;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center">‹</button>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="font:800 44px/0.95 'Barlow Condensed',sans-serif;text-transform:uppercase">Como te<br>chamas?</div>
+          <p style="margin:0;font-size:15px;color:#9a9ca0">Usamos estes dados para confirmar marcações por notificação na app e email, lembrar-te 24 h antes e dar-te 10% no dia do teu aniversário.</p>
+        </div>
+        <sc-if value="{{ hasProvider }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;border-radius:12px;border:1px solid #e8f23a;background:#1a1c10"><span style="display:flex;flex-direction:column;gap:2px;min-width:0"><span style="font-size:14px;font-weight:700;color:#e8f23a">Ligado com {{ providerLabel }}</span><span style="font-size:13px;color:#c9cacc">Falta só o telemóvel e a data de nascimento.</span><sc-if value="{{ providerDemo }}" hint-placeholder-val="{{ false }}"><span style="font-size:11px;color:#9a9ca0">Simulação: o início de sessão real ainda não está configurado.</span></sc-if></span><button onClick="{{ clearProvider }}" style="flex:none;border:none;background:none;color:#9a9ca0;font-size:13px;font-weight:600;cursor:pointer;text-decoration:underline">Usar email</button></div>
+        </sc-if>
+        <sc-if value="{{ needsPassword }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <button onClick="{{ socialGoogle }}" style="height:52px;border-radius:12px;border:1px solid #dadce0;background:#fff;color:#1f1f1f;font-size:16px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px" style-active="transform:scale(.98)"><svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg><span>Continuar com Google</span></button>
+          <button onClick="{{ socialApple }}" style="height:52px;border-radius:12px;border:1px solid #dadce0;background:#fff;color:#1f1f1f;font-size:16px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px" style-active="transform:scale(.98)"><svg width="18" height="20" viewBox="0 0 384 512" aria-hidden="true"><path fill="#000" d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg><span>Continuar com Apple</span></button>
+          <div style="display:flex;align-items:center;gap:12px;margin-top:4px;color:#6a6c70;font-size:13px;font-weight:600"><span style="flex:1;height:1px;background:#26282b"></span>ou com email<span style="flex:1;height:1px;background:#26282b"></span></div>
+        </div>
+        </sc-if>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <label style="display:flex;flex-direction:column;gap:7px"><span style="font:700 13px 'Barlow Condensed',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#9a9ca0">Nome</span><input value="{{ name }}" onChange="{{ onName }}" placeholder="O teu nome" style="height:52px;border-radius:12px;border:1px solid #26282b;background:#111214;color:#f4f4f2;padding:0 16px;font-size:17px;outline:none" style-focus="border-color:#e8f23a"></label>
+          <label style="display:flex;flex-direction:column;gap:7px"><span style="font:700 13px 'Barlow Condensed',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#9a9ca0">Telemóvel</span><div style="display:flex;gap:8px"><div style="position:relative;flex:none;height:52px;border-radius:12px;border:1px solid #26282b;background:#111214;display:flex;align-items:center;gap:6px;padding:0 12px;font-size:17px;font-weight:600" style-hover="border-color:#4a4c50"><span style="white-space:nowrap">{{ countryShort }}</span><span style="color:#9a9ca0;font-size:12px">▾</span><select value="{{ country }}" onChange="{{ onCountry }}" aria-label="País" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;font-size:16px"><sc-for list="{{ countries }}" as="c" hint-placeholder-count="8"><option value="{{ c.code }}">{{ c.label }}</option></sc-for></select></div><input value="{{ phone }}" onChange="{{ onPhone }}" placeholder="{{ phonePh }}" inputMode="tel" style="height:52px;flex:1;min-width:0;border-radius:12px;border:1px solid #26282b;background:#111214;color:#f4f4f2;padding:0 16px;font-size:17px;outline:none;font-variant-numeric:tabular-nums" style-focus="border-color:#e8f23a"></div><span style="font-size:12px;color:{{ phoneHintColor }}">{{ phoneHint }}</span></label>
+          <label style="display:flex;flex-direction:column;gap:7px"><span style="font:700 13px 'Barlow Condensed',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#9a9ca0">Email</span><input value="{{ email }}" onChange="{{ onEmail }}" placeholder="nome@email.com" type="email" inputMode="email" autoComplete="email" style="height:52px;border-radius:12px;border:1px solid {{ emailBorder }};background:#111214;color:#f4f4f2;padding:0 16px;font-size:17px;outline:none" style-focus="border-color:#e8f23a"></label>
+          <label style="display:flex;flex-direction:column;gap:7px"><span style="font:700 13px 'Barlow Condensed',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#9a9ca0">Data de nascimento</span><input value="{{ birth }}" onChange="{{ onBirth }}" type="date" max="{{ todayISO }}" style="height:52px;border-radius:12px;border:1px solid #26282b;background:#111214;color:#f4f4f2;padding:0 16px;font-size:17px;outline:none;color-scheme:dark" style-focus="border-color:#e8f23a"><span style="font-size:12px;color:#9a9ca0">Para o desconto de aniversário.</span></label>
+          <sc-if value="{{ needsPassword }}" hint-placeholder-val="{{ true }}">
+          <label style="display:flex;flex-direction:column;gap:7px"><span style="font:700 13px 'Barlow Condensed',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#9a9ca0">Palavra-passe</span><input value="{{ password }}" onChange="{{ onPassword }}" type="password" autoComplete="new-password" placeholder="Mínimo 6 caracteres" style="height:52px;border-radius:12px;border:1px solid #26282b;background:#111214;color:#f4f4f2;padding:0 16px;font-size:17px;outline:none" style-focus="border-color:#e8f23a"></label>
+          </sc-if>
+        </div>
+        <div style="flex:1"></div>
+        <button onClick="{{ finishOnb }}" disabled="{{ detailsInvalid }}" style="height:56px;border:none;border-radius:12px;background:{{ detailsBtnBg }};color:{{ detailsBtnFg }};font:800 20px 'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.04em;cursor:pointer;transition:background .2s">Continuar</button>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isSocial }}" hint-placeholder-val="{{ false }}">
+      <div style="flex:1;overflow-y:auto;display:flex;flex-direction:column;padding:8px 24px 36px;gap:20px">
+        <button onClick="{{ goWelcome }}" style="width:42px;height:42px;border-radius:10px;border:1px solid #26282b;background:#111214;color:#f4f4f2;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center">‹</button>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="font:800 44px/0.95 'Barlow Condensed',sans-serif;text-transform:uppercase">Só falta<br>isto</div>
+          <p style="margin:0;font-size:15px;color:#9a9ca0">Precisamos do teu telemóvel para as marcações e da data de aniversário para o teu desconto.</p>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;border:1px solid #26282b;background:#111214">
+          <div style="width:40px;height:40px;flex:none;border-radius:50%;background:#e8f23a;color:#000;display:flex;align-items:center;justify-content:center;font:800 20px 'Barlow Condensed',sans-serif">{{ socialInitial }}</div>
+          <div style="display:flex;flex-direction:column;gap:1px;min-width:0;flex:1"><span style="font-size:16px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ name }}</span><span style="font-size:13px;color:#9a9ca0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ email }}</span></div>
+          <span style="flex:none;font-size:12px;font-weight:700;color:#e8f23a">{{ providerLabel }}</span>
+        </div>
+        <sc-if value="{{ providerDemo }}" hint-placeholder-val="{{ false }}"><span style="font-size:12px;color:#9a9ca0;margin-top:-10px">Simulação: o início de sessão real ainda não está configurado.</span></sc-if>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <label style="display:flex;flex-direction:column;gap:7px"><span style="font:700 13px 'Barlow Condensed',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#9a9ca0">Telemóvel</span><div style="display:flex;gap:8px"><div style="position:relative;flex:none;height:52px;border-radius:12px;border:1px solid #26282b;background:#111214;display:flex;align-items:center;gap:6px;padding:0 12px;font-size:17px;font-weight:600" style-hover="border-color:#4a4c50"><span style="white-space:nowrap">{{ countryShort }}</span><span style="color:#9a9ca0;font-size:12px">▾</span><select value="{{ country }}" onChange="{{ onCountry }}" aria-label="País" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;font-size:16px"><sc-for list="{{ countries }}" as="c" hint-placeholder-count="8"><option value="{{ c.code }}">{{ c.label }}</option></sc-for></select></div><input value="{{ phone }}" onChange="{{ onPhone }}" placeholder="{{ phonePh }}" inputMode="tel" style="height:52px;flex:1;min-width:0;border-radius:12px;border:1px solid #26282b;background:#111214;color:#f4f4f2;padding:0 16px;font-size:17px;outline:none;font-variant-numeric:tabular-nums" style-focus="border-color:#e8f23a"></div><span style="font-size:12px;color:{{ phoneHintColor }}">{{ phoneHint }}</span></label>
+          <label style="display:flex;flex-direction:column;gap:7px"><span style="font:700 13px 'Barlow Condensed',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#9a9ca0">Data de aniversário</span><input value="{{ birth }}" onChange="{{ onBirth }}" type="date" max="{{ todayISO }}" style="height:52px;border-radius:12px;border:1px solid #26282b;background:#111214;color:#f4f4f2;padding:0 16px;font-size:17px;outline:none;color-scheme:dark" style-focus="border-color:#e8f23a"><span style="font-size:12px;color:#9a9ca0">No dia de anos tens 10% em qualquer serviço.</span></label>
+        </div>
+        <div style="flex:1"></div>
+        <button onClick="{{ finishOnb }}" disabled="{{ socialInvalid }}" style="height:56px;border:none;border-radius:12px;background:{{ socialBtnBg }};color:{{ socialBtnFg }};font:800 20px 'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.04em;cursor:pointer;transition:background .2s">Concluir</button>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isHome }}" hint-placeholder-val="{{ false }}">
+      <div style="flex:1;overflow-y:auto;padding:6px 20px 24px;display:flex;flex-direction:column;gap:22px">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <div style="font-size:14px;color:#9a9ca0">{{ todayLabel }}</div>
+            <div style="font:800 40px/1 'Barlow Condensed',sans-serif;text-transform:uppercase;margin-top:2px">Olá, {{ firstName }}</div>
+          </div>
+          <img src="assets/logo.png" alt="" style="width:48px;height:48px;border-radius:50%;border:1px solid #26282b">
+        </div>
+
+        <sc-if value="{{ hasNext }}" hint-placeholder-val="{{ true }}">
+          <div style="border-radius:16px;border:1px solid #e8f23a;background:#111214;padding:18px;display:flex;flex-direction:column;gap:12px">
+            <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:700 13px 'Barlow Condensed',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#e8f23a">Próxima visita</span><span style="font-size:13px;font-weight:600;color:#000;background:#e8f23a;border-radius:6px;padding:2px 8px">{{ nextAppt.countdown }}</span></div>
+            <div style="font:800 32px/1 'Barlow Condensed',sans-serif;text-transform:uppercase">{{ nextAppt.dateLong }} · {{ nextAppt.time }}</div>
+            <div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid #26282b;padding-top:12px;font-size:15px">
+              <span style="color:#c9cacc">{{ nextAppt.service }}</span>
+              <button onClick="{{ goBookings }}" style="border:none;background:none;color:#e8f23a;font-size:15px;font-weight:600;cursor:pointer;padding:0">Gerir ›</button>
+            </div>
+          </div>
+        </sc-if>
+
+        <button onClick="{{ startBooking }}" style="height:58px;border:none;border-radius:12px;background:#e8f23a;color:#000;font:800 21px 'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.04em;cursor:pointer;display:flex;align-items:center;justify-content:space-between;padding:0 20px" style-hover="background:#f0f86a" style-active="transform:scale(.98)"><span>Marcar corte</span><span style="font-size:26px">›</span></button>
+
+        <div style="border-radius:16px;border:1px solid #26282b;background:#0d0e10;padding:16px;display:flex;flex-direction:column;gap:14px">
+          <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font:800 22px 'Barlow Condensed',sans-serif;text-transform:uppercase">Cartão de cliente</span><span style="font:800 22px 'Barlow Condensed',sans-serif;color:#e8f23a">{{ loyaltyCount }}</span></div>
+          <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px">
+            <sc-for list="{{ stamps }}" as="st" hint-placeholder-count="10">
+              <div style="aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;font:800 13px 'Barlow Condensed',sans-serif;text-transform:uppercase;background:{{ st.bg }};color:{{ st.fg }};border:1.5px {{ st.borderStyle }} {{ st.border }}">{{ st.label }}</div>
+            </sc-for>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:3px"><div style="font-size:14px;color:{{ loyaltyMsgColor }}">{{ loyaltyMsg }}</div><div style="font-size:12px;color:#6a6c70">{{ loyaltyNote }}</div></div>
+        </div>
+
+        <sc-if value="{{ hasBirth }}" hint-placeholder-val="{{ false }}">
+          <div style="border-radius:16px;border:1px dashed #e8f23a;padding:16px;display:flex;align-items:center;gap:14px">
+            <div style="width:56px;height:56px;flex:none;border-radius:50%;background:#e8f23a;color:#000;display:flex;align-items:center;justify-content:center;font:800 20px 'Barlow Condensed',sans-serif">-10%</div>
+            <div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font:800 19px/1.05 'Barlow Condensed',sans-serif;text-transform:uppercase">{{ bdayTitle }}</span><span style="font-size:13px;color:#9a9ca0">{{ bdaySub }}</span></div>
+            <sc-if value="{{ bdayBookable }}" hint-placeholder-val="{{ false }}"><button onClick="{{ bookBday }}" style="flex:none;height:36px;padding:0 12px;border-radius:8px;border:1px solid #e8f23a;background:none;color:#e8f23a;font:700 15px 'Barlow Condensed',sans-serif;text-transform:uppercase;cursor:pointer">Marcar</button></sc-if>
+          </div>
+        </sc-if>
+
+        <div style="border-radius:16px;border:1px solid #26282b;background:#0d0e10;padding:16px;display:flex;flex-direction:column;gap:10px">
+          <div style="font:800 22px 'Barlow Condensed',sans-serif;text-transform:uppercase">Serviços</div>
+          <sc-for list="{{ services }}" as="s" hint-placeholder-count="5">
+            <button onClick="{{ s.onQuick }}" style="display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-radius:10px;border:1px solid #26282b;background:#151619;cursor:pointer;text-align:left;color:#f4f4f2" style-hover="border-color:#4a4c50">
+              <span style="display:flex;flex-direction:column;gap:1px"><span style="font-size:16px;font-weight:600">{{ s.name }}</span><span style="font-size:12px;color:#9a9ca0">{{ s.dur }} min</span></span>
+              <span style="font:800 24px 'Barlow Condensed',sans-serif;color:#e8f23a">{{ s.price }}€</span>
+            </button>
+          </sc-for>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div style="border-radius:14px;border:1px solid #26282b;background:#0d0e10;padding:14px;display:flex;flex-direction:column;gap:4px"><span style="font:800 16px 'Barlow Condensed',sans-serif;text-transform:uppercase">Horário</span><span style="font-size:13px;color:#9a9ca0;line-height:1.4">Ter–Sáb · 10h–19h<br>Domingo e segunda: fechado</span></div>
+          <div style="border-radius:14px;border:1px solid #26282b;background:#0d0e10;padding:14px;display:flex;flex-direction:column;gap:4px"><span style="font:800 16px 'Barlow Condensed',sans-serif;text-transform:uppercase">Contacto</span><span style="font-size:13px;color:#e8f23a">@twentytwo_22barber</span></div>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isBookings }}" hint-placeholder-val="{{ false }}">
+      <div style="flex:1;overflow-y:auto;padding:6px 20px 24px;display:flex;flex-direction:column;gap:16px">
+        <div style="font:800 40px/1 'Barlow Condensed',sans-serif;text-transform:uppercase">Marcações</div>
+        <div style="font:700 13px 'Barlow Condensed',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#9a9ca0">Próximas</div>
+        <sc-if value="{{ noUpcoming }}" hint-placeholder-val="{{ false }}">
+          <div style="border:1px dashed #3a3c40;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:12px;align-items:flex-start">
+            <div style="font-size:15px;color:#9a9ca0">Não tens nenhuma marcação.</div>
+            <button onClick="{{ startBooking }}" style="height:42px;padding:0 18px;border:none;border-radius:10px;background:#e8f23a;color:#000;font:800 17px 'Barlow Condensed',sans-serif;text-transform:uppercase;cursor:pointer">Marcar corte</button>
+          </div>
+        </sc-if>
+        <sc-for list="{{ upcoming }}" as="a" hint-placeholder-count="1">
+          <div style="border-radius:16px;border:1px solid #26282b;background:#111214;padding:16px;display:flex;flex-direction:column;gap:14px">
+            <div style="display:flex;gap:14px;align-items:center">
+              <div style="width:60px;height:64px;flex:none;border-radius:12px;background:#e8f23a;color:#000;display:flex;flex-direction:column;align-items:center;justify-content:center"><span style="font:700 12px 'Barlow Condensed',sans-serif;letter-spacing:.08em;text-transform:uppercase">{{ a.mon }}</span><span style="font:800 32px/0.9 'Barlow Condensed',sans-serif">{{ a.day }}</span></div>
+              <div style="display:flex;flex-direction:column;gap:3px"><div style="font-size:17px;font-weight:600">{{ a.service }}</div><div style="font-size:14px;color:#9a9ca0">{{ a.dow }} · {{ a.time }} · {{ a.barber }}</div><span style="align-self:flex-start;font-size:12px;font-weight:600;color:#e8f23a">{{ a.paidLabel }}</span></div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+              <button onClick="{{ a.onReschedule }}" style="height:44px;border-radius:10px;border:1px solid #3a3c40;background:none;color:#f4f4f2;font:700 16px 'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.04em;cursor:pointer" style-hover="border-color:#f4f4f2">Remarcar</button>
+              <button onClick="{{ a.onCancel }}" style="height:44px;border-radius:10px;border:1px solid #3a3c40;background:none;color:#ff6b6b;font:700 16px 'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.04em;cursor:pointer" style-hover="border-color:#ff6b6b">Cancelar</button>
+            </div>
+          </div>
+        </sc-for>
+        <div style="font:700 13px 'Barlow Condensed',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#9a9ca0;margin-top:6px">Anteriores</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <sc-for list="{{ past }}" as="p" hint-placeholder-count="2">
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-radius:12px;border:1px solid #26282b;background:#0d0e10">
+              <div style="display:flex;flex-direction:column;gap:2px"><div style="font-size:15px;font-weight:600">{{ p.service }}</div><div style="font-size:12px;color:#9a9ca0">{{ p.date }}</div></div>
+              <button onClick="{{ p.onAgain }}" style="height:36px;padding:0 14px;border-radius:8px;border:1px solid #e8f23a;background:none;color:#e8f23a;font:700 15px 'Barlow Condensed',sans-serif;text-transform:uppercase;cursor:pointer">Repetir</button>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isProfile }}" hint-placeholder-val="{{ false }}">
+      <div style="flex:1;overflow-y:auto;padding:6px 20px 24px;display:flex;flex-direction:column;gap:18px">
+        <div style="display:flex;align-items:center;gap:14px">
+          <div style="width:60px;height:60px;border-radius:50%;background:#e8f23a;color:#000;display:flex;align-items:center;justify-content:center;font:800 28px 'Barlow Condensed',sans-serif">{{ initial }}</div>
+          <div style="display:flex;flex-direction:column"><span style="font:800 32px/1 'Barlow Condensed',sans-serif;text-transform:uppercase">{{ fullName }}</span><span style="font-size:14px;color:#9a9ca0">Cliente desde 2026</span></div>
+        </div>
+        <div style="border-radius:16px;border:1px solid #26282b;background:#111214;padding:2px 16px">
+          <sc-for list="{{ profileRows }}" as="r" hint-placeholder-count="5">
+            <div style="display:flex;justify-content:space-between;gap:12px;padding:13px 0;border-bottom:1px solid #1c1d1f;font-size:15px"><span style="color:#9a9ca0">{{ r.k }}</span><span style="font-weight:600;text-align:right">{{ r.v }}</span></div>
+          </sc-for>
+          <button onClick="{{ editProfile }}" style="width:100%;height:46px;border:none;background:none;color:#e8f23a;font-size:15px;font-weight:600;cursor:pointer">Editar dados</button>
+        </div>
+        <div style="border-radius:16px;border:1px solid #26282b;background:#111214;padding:16px;display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;justify-content:space-between;align-items:center"><span style="font:800 18px 'Barlow Condensed',sans-serif;text-transform:uppercase">Notificações</span><span style="font-size:13px;font-weight:600;color:{{ permColor }}">{{ permLabel }}</span></div>
+          <div style="font-size:13px;color:#9a9ca0">Recebe a confirmação e o lembrete 24 h antes neste telemóvel.</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+            <button onClick="{{ askPerm }}" style="height:44px;border-radius:10px;border:none;background:#e8f23a;color:#000;font:800 16px 'Barlow Condensed',sans-serif;text-transform:uppercase;cursor:pointer">{{ permBtn }}</button>
+            <button onClick="{{ testNotif }}" style="height:44px;border-radius:10px;border:1px solid #3a3c40;background:none;color:#f4f4f2;font:700 16px 'Barlow Condensed',sans-serif;text-transform:uppercase;cursor:pointer">Testar</button>
+          </div>
+        </div>
+        <sc-if value="{{ showInstallTip }}" hint-placeholder-val="{{ false }}">
+          <div style="border-radius:16px;border:1px dashed #3a3c40;padding:16px;display:flex;flex-direction:column;gap:6px">
+            <span style="font:800 18px 'Barlow Condensed',sans-serif;text-transform:uppercase">Instalar a app</span>
+            <span style="font-size:13px;line-height:1.5;color:#9a9ca0">iPhone: toca em Partilhar e depois em "Adicionar ao ecrã principal". Android: menu ⋮ e depois "Instalar app".</span>
+          </div>
+        </sc-if>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <button onClick="{{ logout }}" style="height:48px;border-radius:12px;border:1px solid #26282b;background:#0d0e10;color:#ff6b6b;font-size:15px;font-weight:600;cursor:pointer">Terminar sessão</button>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isFlow }}" hint-placeholder-val="{{ false }}">
+      <div style="flex:none;padding:4px 20px 14px;display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <button onClick="{{ back }}" style="width:42px;height:42px;border-radius:10px;border:1px solid #26282b;background:#111214;color:#f4f4f2;font-size:22px;cursor:pointer">‹</button>
+          <div style="display:flex;gap:6px">
+            <sc-for list="{{ progress }}" as="pg" hint-placeholder-count="3">
+              <span style="width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:800 15px 'Barlow Condensed',sans-serif;background:{{ pg.bg }};color:{{ pg.fg }};border:1px solid {{ pg.border }};transition:background .2s">{{ pg.n }}</span>
+            </sc-for>
+          </div>
+          <button onClick="{{ exitFlow }}" style="width:42px;height:42px;border-radius:10px;border:none;background:none;color:#9a9ca0;font-size:24px;cursor:pointer">×</button>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <span style="width:30px;height:30px;border-radius:50%;background:#e8f23a;color:#000;display:flex;align-items:center;justify-content:center;font:800 18px 'Barlow Condensed',sans-serif">{{ stepN }}</span>
+          <span style="font:800 32px/1 'Barlow Condensed',sans-serif;text-transform:uppercase">{{ stepTitle }}</span>
+        </div>
+      </div>
+      <div style="flex:1;overflow-y:auto;padding:2px 20px 24px">
+        <sc-if value="{{ step1 }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <sc-for list="{{ services }}" as="s" hint-placeholder-count="5">
+              <button onClick="{{ s.onPick }}" style="display:flex;justify-content:space-between;align-items:center;padding:16px;border-radius:12px;border:1px solid {{ s.border }};background:{{ s.bg }};cursor:pointer;text-align:left;color:#f4f4f2;transition:border-color .15s" style-hover="border-color:#e8f23a">
+                <span style="display:flex;flex-direction:column;gap:2px"><span style="font-size:17px;font-weight:600">{{ s.name }}</span><span style="font-size:13px;color:#9a9ca0">{{ s.dur }} min</span></span>
+                <span style="font:800 28px 'Barlow Condensed',sans-serif;color:#e8f23a">{{ s.price }}€</span>
+              </button>
+            </sc-for>
+          </div>
+        </sc-if>
+        <sc-if value="{{ step2 }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <sc-for list="{{ barberOpts }}" as="b" hint-placeholder-count="2">
+              <button onClick="{{ b.onPick }}" style="display:flex;align-items:center;gap:14px;padding:14px;border-radius:14px;border:1px solid {{ b.border }};background:{{ b.bg }};cursor:pointer;text-align:left;color:#f4f4f2;transition:border-color .15s" style-hover="border-color:#e8f23a">
+                <div style="width:64px;height:64px;flex:none;border-radius:50%;background:repeating-linear-gradient(135deg,#1c1d1f 0 6px,#232427 6px 12px);border:2px solid {{ b.ring }};display:flex;align-items:center;justify-content:center;font:800 26px 'Barlow Condensed',sans-serif;color:#e8f23a">{{ b.initial }}</div>
+                <div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font:800 24px/1 'Barlow Condensed',sans-serif;text-transform:uppercase">{{ b.name }}</span><span style="font-size:13px;color:#9a9ca0">{{ b.next }}</span></div>
+                <span style="width:24px;height:24px;flex:none;border-radius:50%;border:2px solid {{ b.ring }};background:{{ b.dot }};box-shadow:inset 0 0 0 4px #111214"></span>
+              </button>
+            </sc-for>
+          </div>
+        </sc-if>
+        <sc-if value="{{ step3 }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:22px">
+            <div style="border-radius:16px;border:1px solid #26282b;background:#0d0e10;padding:14px;display:flex;flex-direction:column;gap:10px">
+              <div style="display:flex;align-items:center;justify-content:space-between"><button onClick="{{ calPrev }}" disabled="{{ calPrevDis }}" aria-label="Mês anterior" style="width:38px;height:38px;border-radius:9px;border:1px solid #26282b;background:#111214;color:#f4f4f2;font-size:20px;cursor:pointer;opacity:{{ calPrevOp }}">‹</button><span style="font-size:16px;font-weight:600">{{ calTitle }}</span><button onClick="{{ calNext }}" disabled="{{ calNextDis }}" aria-label="Mês seguinte" style="width:38px;height:38px;border-radius:9px;border:1px solid #26282b;background:#111214;color:#f4f4f2;font-size:20px;cursor:pointer;opacity:{{ calNextOp }}">›</button></div>
+              <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:5px">
+                <sc-for list="{{ dowHead }}" as="h" hint-placeholder-count="7"><span style="text-align:center;font-size:12px;color:#9a9ca0;padding-bottom:2px">{{ h }}</span></sc-for>
+                <sc-for list="{{ calCells }}" as="d" hint-placeholder-count="35">
+                  <button onClick="{{ d.onPick }}" disabled="{{ d.disabled }}" style="position:relative;aspect-ratio:1;border-radius:8px;border:1px solid {{ d.border }};background:{{ d.bg }};color:{{ d.fg }};font-size:15px;font-weight:700;cursor:pointer;padding:0;visibility:{{ d.vis }}">{{ d.day }}<span style="position:absolute;bottom:4px;left:50%;transform:translateX(-50%);width:5px;height:5px;border-radius:3px;background:{{ d.dot }}"></span></button>
+                </sc-for>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font:800 20px 'Barlow Condensed',sans-serif;text-transform:uppercase">{{ timesHeader }}</span><span style="font-size:13px;color:#9a9ca0">{{ freeCount }}</span></div>
+              <sc-if value="{{ noDate }}" hint-placeholder-val="{{ true }}"><p style="margin:0;font-size:15px;color:#9a9ca0">Escolhe o dia.</p></sc-if>
+              <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:7px">
+                <sc-for list="{{ times }}" as="t" hint-placeholder-count="0">
+                  <button onClick="{{ t.onPick }}" disabled="{{ t.off }}" style="height:46px;border-radius:10px;font-size:15px;font-weight:700;font-variant-numeric:tabular-nums;cursor:pointer;background:{{ t.bg }};color:{{ t.fg }};border:1px solid {{ t.border }};text-decoration:{{ t.deco }}">{{ t.t }}</button>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ step4 }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:20px">
+            <div style="border-radius:16px;border:1px solid #26282b;background:#111214;padding:4px 16px">
+              <sc-for list="{{ reviewRows }}" as="r" hint-placeholder-count="2">
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid #26282b;font-size:15px">
+                  <span style="color:#9a9ca0">{{ r.k }}</span>
+                  <span style="display:flex;gap:12px;align-items:center"><span style="font-weight:600">{{ r.v }}</span><button onClick="{{ r.onEdit }}" style="border:none;background:none;color:#e8f23a;font-size:14px;font-weight:600;cursor:pointer;padding:0">Alterar</button></span>
+                </div>
+              </sc-for>
+              <sc-for list="{{ discounts }}" as="dc" hint-placeholder-count="0">
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid #26282b;font-size:15px"><span style="color:#e8f23a;font-weight:600">{{ dc.k }}</span><span style="color:#e8f23a;font-weight:700">{{ dc.v }}</span></div>
+              </sc-for>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 0"><span style="font:800 18px 'Barlow Condensed',sans-serif;text-transform:uppercase">Total</span><span style="font:800 26px 'Barlow Condensed',sans-serif;color:#e8f23a">{{ totalLabel }}</span></div>
+            </div>
+            <sc-if value="{{ showPayOptions }}" hint-placeholder-val="{{ true }}">
+              <div style="display:flex;flex-direction:column;gap:10px">
+                <div style="font:700 13px 'Barlow Condensed',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#9a9ca0">Pagamento</div>
+                <div style="display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:12px;border:1px solid #26282b;background:#111214;color:#f4f4f2">
+                  <span style="display:flex;flex-direction:column;gap:1px;flex:1"><span style="font-size:16px;font-weight:600">Pagas na barbearia, no dia</span><span style="font-size:13px;color:#9a9ca0">Dinheiro, cartão ou MB WAY</span></span>
+                  <span style="font:800 24px 'Barlow Condensed',sans-serif">{{ totalLabel }}</span>
+                </div>
+                <p style="margin:4px 0 0;font-size:13px;line-height:1.5;color:#9a9ca0">{{ payPolicy }}</p>
+              </div>
+            </sc-if>
+            <sc-if value="{{ isFreeNew }}" hint-placeholder-val="{{ false }}">
+              <div style="border-radius:16px;background:#e8f23a;color:#000;padding:18px;display:flex;flex-direction:column;gap:4px"><span style="font:800 26px/1 'Barlow Condensed',sans-serif;text-transform:uppercase">10º corte. É por nossa conta.</span><span style="font-size:14px">Não pagas nada, nem agora nem no dia.</span></div>
+            </sc-if>
+            <sc-if value="{{ isResched }}" hint-placeholder-val="{{ false }}">
+              <p style="margin:0;font-size:14px;color:#9a9ca0">O pagamento que já fizeste passa para a nova hora. Não há nada a pagar agora.</p>
+            </sc-if>
+          </div>
+        </sc-if>
+      </div>
+      <div style="flex:none;padding:14px 20px 30px;border-top:1px solid #1c1d1f;background:#000;display:flex;align-items:center;gap:14px">
+        <div style="flex:1;display:flex;flex-direction:column;min-width:0"><span style="font-size:16px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ footTitle }}</span><span style="font-size:13px;color:#9a9ca0">{{ footSub }}</span></div>
+        <button onClick="{{ onNext }}" disabled="{{ nextDisabled }}" style="height:52px;padding:0 22px;border:none;border-radius:12px;background:{{ nextBg }};color:{{ nextFg }};font:800 19px 'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.04em;cursor:pointer;white-space:nowrap;transition:background .2s">{{ nextLabel }}</button>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isDone }}" hint-placeholder-val="{{ false }}">
+      <div style="flex:1;display:flex;flex-direction:column;justify-content:space-between;padding:24px 22px 36px">
+        <div style="display:flex;flex-direction:column;gap:18px">
+          <div style="width:60px;height:60px;border-radius:50%;background:#e8f23a;color:#000;display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:700">✓</div>
+          <div style="font:800 60px/0.9 'Barlow Condensed',sans-serif;text-transform:uppercase">{{ doneTitle }}</div>
+          <div style="border-radius:16px;border:1px solid #26282b;background:#111214;padding:4px 16px">
+            <sc-for list="{{ receipt }}" as="r" hint-placeholder-count="4">
+              <div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #26282b;font-size:15px"><span style="color:#9a9ca0">{{ r.k }}</span><span style="font-weight:600">{{ r.v }}</span></div>
+            </sc-for>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="font:700 13px 'Barlow Condensed',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#9a9ca0">Notificações</div>
+            <sc-for list="{{ doneNotifs }}" as="n" hint-placeholder-count="2">
+              <div style="display:flex;gap:12px;align-items:flex-start"><span style="width:8px;height:8px;flex:none;margin-top:6px;border-radius:4px;background:{{ n.dot }}"></span><span style="display:flex;flex-direction:column;gap:1px"><span style="font-size:15px;font-weight:600">{{ n.k }}</span><span style="font-size:13px;color:#9a9ca0">{{ n.v }}</span></span></div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <button onClick="{{ toggleCal }}" style="height:52px;border-radius:12px;border:1px solid #3a3c40;background:none;color:#f4f4f2;font:700 18px 'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.04em;cursor:pointer">{{ calLabel }}</button>
+          <button onClick="{{ goHome }}" style="height:52px;border-radius:12px;border:none;background:#e8f23a;color:#000;font:800 19px 'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.04em;cursor:pointer">Concluir</button>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isLogin }}" hint-placeholder-val="{{ false }}">
+      <div style="flex:1;overflow-y:auto;display:flex;flex-direction:column;padding:8px 24px 36px;gap:22px">
+        <button onClick="{{ goWelcome }}" style="width:42px;height:42px;border-radius:10px;border:1px solid #26282b;background:#111214;color:#f4f4f2;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center">‹</button>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="font:800 44px/0.95 'Barlow Condensed',sans-serif;text-transform:uppercase">Iniciar<br>sessão</div>
+          <p style="margin:0;font-size:15px;color:#9a9ca0">Entra com o teu utilizador, número de telemóvel ou email.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <button onClick="{{ socialGoogle }}" style="height:52px;border-radius:12px;border:1px solid #dadce0;background:#fff;color:#1f1f1f;font-size:16px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px" style-active="transform:scale(.98)"><svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg><span>Entrar com Google</span></button>
+          <button onClick="{{ socialApple }}" style="height:52px;border-radius:12px;border:1px solid #dadce0;background:#fff;color:#1f1f1f;font-size:16px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px" style-active="transform:scale(.98)"><svg width="18" height="20" viewBox="0 0 384 512" aria-hidden="true"><path fill="#000" d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg><span>Entrar com Apple</span></button>
+          <div style="display:flex;align-items:center;gap:12px;margin-top:4px;color:#6a6c70;font-size:13px;font-weight:600"><span style="flex:1;height:1px;background:#26282b"></span>ou com email<span style="flex:1;height:1px;background:#26282b"></span></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <label style="display:flex;flex-direction:column;gap:7px"><span style="font:700 13px 'Barlow Condensed',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#9a9ca0">Utilizador, número ou email</span><input value="{{ bUser }}" onChange="{{ onBUser }}" autoComplete="username" autoCapitalize="none" style="height:52px;border-radius:12px;border:1px solid {{ bErrBorder }};background:#111214;color:#f4f4f2;padding:0 16px;font-size:17px;outline:none" style-focus="border-color:#e8f23a"></label>
+          <label style="display:flex;flex-direction:column;gap:7px"><span style="font:700 13px 'Barlow Condensed',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#9a9ca0">Palavra-passe</span><input value="{{ bPass }}" onChange="{{ onBPass }}" onKeyDown="{{ onBKey }}" type="password" autoComplete="current-password" style="height:52px;border-radius:12px;border:1px solid {{ bErrBorder }};background:#111214;color:#f4f4f2;padding:0 16px;font-size:17px;outline:none" style-focus="border-color:#e8f23a"></label>
+          <sc-if value="{{ bErr }}" hint-placeholder-val="{{ false }}"><span style="font-size:14px;color:#ff6b6b;margin-top:-6px">Dados de acesso errados.</span></sc-if>
+        </div>
+        <div style="flex:1"></div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <button onClick="{{ barberLogin }}" style="height:56px;border:none;border-radius:12px;background:#e8f23a;color:#000;font:800 20px 'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.04em;cursor:pointer">Entrar</button>
+          <button onClick="{{ goDetails }}" style="height:44px;border:none;background:none;color:#9a9ca0;font-size:15px;font-weight:500;cursor:pointer" style-hover="color:#f4f4f2">Ainda não tens conta? <span style="color:#e8f23a">Criar conta</span></button>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isBarber }}" hint-placeholder-val="{{ false }}">
+      <div style="flex:1;overflow-y:auto;padding:6px 20px 24px;display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-end">
+          <div><div style="font:700 13px 'Barlow Condensed',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#e8f23a">Agenda · {{ bName }}</div><div style="font:800 36px/1 'Barlow Condensed',sans-serif;text-transform:uppercase;margin-top:2px">{{ bDayLong }}</div></div>
+          <div style="display:flex;gap:6px;align-items:center"><span style="font-size:13px;font-weight:600;color:#9a9ca0;border:1px solid #26282b;border-radius:8px;padding:4px 9px">{{ bOpenLabel }}</span><button onClick="{{ openBMenu }}" aria-label="Perfil do barbeiro" style="width:36px;height:36px;border-radius:50%;border:none;background:#e8f23a;color:#000;font:800 17px 'Barlow Condensed',sans-serif;cursor:pointer">{{ bInitial }}</button></div>
+        </div>
+        <sc-if value="{{ bCalView }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div style="display:flex;align-items:center;justify-content:space-between">
+              <button onClick="{{ bPrevMonth }}" disabled="{{ bNoPrev }}" aria-label="Mês anterior" style="width:38px;height:38px;border-radius:10px;border:1px solid #26282b;background:#111214;color:#f4f4f2;font-size:18px;cursor:pointer;opacity:{{ bPrevOp }}">‹</button>
+              <div style="text-align:center"><div style="font:800 26px/1 'Barlow Condensed',sans-serif;text-transform:uppercase">{{ bMonthLabel }}</div><div style="font-size:12px;color:#9a9ca0;margin-top:3px">{{ bMonthTotal }}</div></div>
+              <button onClick="{{ bNextMonth }}" disabled="{{ bNoNext }}" aria-label="Mês seguinte" style="width:38px;height:38px;border-radius:10px;border:1px solid #26282b;background:#111214;color:#f4f4f2;font-size:18px;cursor:pointer;opacity:{{ bNextOp }}">›</button>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:5px">
+              <sc-for list="{{ bWeekdays }}" as="w" hint-placeholder-count="7">
+                <div style="text-align:center;font-size:11px;font-weight:700;color:#9a9ca0;padding-bottom:2px">{{ w }}</div>
+              </sc-for>
+              <sc-for list="{{ bCells }}" as="c" hint-placeholder-count="35">
+                <button onClick="{{ c.onPick }}" disabled="{{ c.off }}" style="aspect-ratio:1/1.15;min-width:0;border-radius:10px;border:1px solid {{ c.border }};background:{{ c.bg }};color:{{ c.fg }};opacity:{{ c.op }};cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:0;visibility:{{ c.vis }}">
+                  <span style="font:800 18px/1 'Barlow Condensed',sans-serif">{{ c.day }}</span>
+                  <span style="font-size:10px;font-weight:800;line-height:1;min-width:16px;padding:2px 4px;border-radius:6px;background:{{ c.pillBg }};color:{{ c.pillFg }}">{{ c.count }}</span>
+                </button>
+              </sc-for>
+            </div>
+            <p style="margin:0;font-size:12px;color:#9a9ca0;text-align:center">Toca num dia para ver os cortes.</p>
+          </div>
+        </sc-if>
+        <sc-if value="{{ bDayView }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;gap:7px;overflow-x:auto;margin:0 -20px;padding:2px 20px">
+          <sc-for list="{{ bDates }}" as="d" hint-placeholder-count="7">
+            <button onClick="{{ d.onPick }}" style="flex:none;width:52px;height:70px;border-radius:12px;cursor:pointer;background:{{ d.bg }};color:{{ d.fg }};border:1px solid {{ d.border }};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;opacity:{{ d.op }}">
+              <span style="font-size:11px;font-weight:600">{{ d.dow }}</span><span style="font:800 24px/1 'Barlow Condensed',sans-serif">{{ d.day }}</span><span style="font-size:10px;font-weight:700">{{ d.count }}</span>
+            </button>
+          </sc-for>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
+          <sc-for list="{{ bStats }}" as="st" hint-placeholder-count="3">
+            <div style="border-radius:12px;border:1px solid #26282b;background:#0d0e10;padding:12px;display:flex;flex-direction:column;gap:2px"><span style="font:800 28px/1 'Barlow Condensed',sans-serif;color:{{ st.color }}">{{ st.v }}</span><span style="font-size:12px;color:#9a9ca0">{{ st.k }}</span></div>
+          </sc-for>
+        </div>
+        <sc-if value="{{ bHasNext }}" hint-placeholder-val="{{ true }}">
+          <button onClick="{{ bNext.onOpen }}" style="display:flex;flex-direction:column;gap:12px;padding:14px 16px 16px;border-radius:14px;border:none;background:#e8f23a;color:#000;cursor:pointer;text-align:left">
+            <span style="display:flex;justify-content:space-between;align-items:center;gap:10px"><span style="font:800 14px 'Barlow Condensed',sans-serif;letter-spacing:.1em;text-transform:uppercase">Próximo cliente</span><span style="font:800 15px 'Barlow Condensed',sans-serif;background:#000;color:#e8f23a;border-radius:7px;padding:3px 9px">{{ bNext.when }}</span></span>
+            <span style="display:flex;flex-direction:column;gap:2px;min-width:0"><span style="font-size:11px;font-weight:700;opacity:.65;text-transform:uppercase;letter-spacing:.06em">Cliente</span><span style="font:800 28px/1.05 'Barlow Condensed',sans-serif;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ bNext.client }}</span></span>
+            <span style="display:grid;grid-template-columns:auto 1fr;gap:18px;padding-top:10px;border-top:1px solid rgba(0,0,0,.15)">
+              <span style="display:flex;flex-direction:column;gap:2px"><span style="font-size:11px;font-weight:700;opacity:.65;text-transform:uppercase;letter-spacing:.06em">Hora</span><span style="font:800 22px/1.05 'Barlow Condensed',sans-serif">{{ bNext.time }}</span></span>
+              <span style="display:flex;flex-direction:column;gap:2px;min-width:0"><span style="font-size:11px;font-weight:700;opacity:.65;text-transform:uppercase;letter-spacing:.06em">Corte</span><span style="font:800 22px/1.05 'Barlow Condensed',sans-serif;text-transform:uppercase">{{ bNext.service }} <span style="font:700 13px Barlow,sans-serif;text-transform:none;opacity:.65;white-space:nowrap">· {{ bNext.dur }} min</span></span></span>
+            </span>
+          </button>
+        </sc-if>
+        <sc-if value="{{ bEmpty }}" hint-placeholder-val="{{ false }}">
+          <p style="margin:16px 0;font-size:15px;color:#9a9ca0;text-align:center">{{ bEmptyText }}</p>
+        </sc-if>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <sc-for list="{{ bAppts }}" as="a" hint-placeholder-count="4">
+            <button onClick="{{ a.onOpen }}" style="display:grid;grid-template-columns:56px 1fr auto;gap:12px;align-items:center;padding:14px;border-radius:12px;border:1px solid #26282b;background:#111214;cursor:pointer;text-align:left;color:#f4f4f2;opacity:{{ a.op }}" style-hover="border-color:#4a4c50">
+              <span style="font:800 21px 'Barlow Condensed',sans-serif">{{ a.time }}</span>
+              <span style="display:flex;flex-direction:column;gap:1px;min-width:0"><span style="font-size:16px;font-weight:600">{{ a.client }}</span><span style="font-size:13px;color:#9a9ca0">{{ a.service }} · {{ a.dur }} min</span></span>
+              <span style="font-size:12px;font-weight:700;border-radius:6px;padding:3px 8px;background:{{ a.tagBg }};color:{{ a.tagFg }};border:1px solid {{ a.tagBorder }}">{{ a.status }}</span>
+            </button>
+          </sc-for>
+        </div>
+        </sc-if>
+        <sc-if value="{{ bProfView }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:18px">
+            <div style="display:flex;align-items:center;gap:14px;padding:16px;border-radius:16px;border:1px solid #26282b;background:#111214">
+              <div style="width:58px;height:58px;flex:none;border-radius:50%;background:#e8f23a;color:#000;display:flex;align-items:center;justify-content:center;font:800 28px 'Barlow Condensed',sans-serif">{{ bInitial }}</div>
+              <div style="display:flex;flex-direction:column;gap:2px;min-width:0"><span style="font:800 26px/1 'Barlow Condensed',sans-serif;text-transform:uppercase">{{ bName }}</span><span style="font-size:13px;color:#9a9ca0">{{ bUserId }} · Barbeiro</span><span style="font-size:13px;color:#9a9ca0">Ter–Sáb · 10:00–19:00</span></div>
+            </div>
+            <sc-if value="{{ pwOk }}" hint-placeholder-val="{{ false }}"><div style="font-size:14px;color:#e8f23a">Palavra-passe alterada.</div></sc-if>
+
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <div style="display:flex;align-items:center;justify-content:space-between">
+                <div style="font:700 13px 'Barlow Condensed',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#9a9ca0">Relatórios</div>
+                <sc-if value="{{ bRepDemo }}" hint-placeholder-val="{{ false }}"><span style="font-size:11px;font-weight:700;color:#000;background:#9a9ca0;border-radius:6px;padding:2px 7px">Dados de exemplo</span></sc-if>
+              </div>
+              <div style="display:flex;gap:6px;overflow-x:auto;margin:0 -20px;padding:0 20px">
+                <sc-for list="{{ bRepChips }}" as="ch" hint-placeholder-count="5">
+                  <button onClick="{{ ch.onPick }}" style="flex:none;height:36px;padding:0 14px;border-radius:18px;border:1px solid {{ ch.border }};background:{{ ch.bg }};color:{{ ch.fg }};font:700 15px 'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.04em;cursor:pointer">{{ ch.label }}</button>
+                </sc-for>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+                <button onClick="{{ bRepPrev }}" aria-label="Período anterior" style="width:38px;height:38px;flex:none;border-radius:10px;border:1px solid #26282b;background:#111214;color:#f4f4f2;font-size:18px;cursor:pointer">‹</button>
+                <div style="text-align:center;min-width:0"><div style="font:800 22px/1.05 'Barlow Condensed',sans-serif;text-transform:uppercase">{{ bRepLabel }}</div><div style="font-size:12px;color:#9a9ca0;margin-top:3px">{{ bRepSub }}</div></div>
+                <button onClick="{{ bRepNext }}" aria-label="Período seguinte" style="width:38px;height:38px;flex:none;border-radius:10px;border:1px solid #26282b;background:#111214;color:#f4f4f2;font-size:18px;cursor:pointer;opacity:{{ bRepNextOp }}">›</button>
+              </div>
+              <sc-if value="{{ bRepLoading }}" hint-placeholder-val="{{ false }}"><div style="font-size:13px;color:#9a9ca0;text-align:center">A carregar…</div></sc-if>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+                <sc-for list="{{ bKpis }}" as="k" hint-placeholder-count="6">
+                  <div style="border-radius:12px;border:1px solid #26282b;background:#0d0e10;padding:12px;display:flex;flex-direction:column;gap:3px;min-width:0">
+                    <span style="font-size:12px;color:#9a9ca0">{{ k.k }}</span>
+                    <span style="font:800 28px/1 'Barlow Condensed',sans-serif">{{ k.v }}</span>
+                    <span style="font-size:11px;font-weight:600;color:{{ k.dcol }}">{{ k.dt }}</span>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="border-radius:12px;border:1px solid #26282b;background:#0d0e10;padding:14px 12px 10px;display:flex;flex-direction:column;gap:8px">
+                <div style="font-size:12px;color:#9a9ca0">Faturação por período</div>
+                <div style="display:flex;align-items:flex-end;gap:5px;height:130px">
+                  <sc-for list="{{ bBars }}" as="b" hint-placeholder-count="7">
+                    <div style="flex:1;min-width:0;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:3px">
+                      <span style="font-size:9px;font-weight:700;color:#9a9ca0;white-space:nowrap">{{ b.v }}</span>
+                      <div style="width:100%;max-width:34px;height:{{ b.h }};border-radius:5px 5px 2px 2px;background:{{ b.bg }}"></div>
+                    </div>
+                  </sc-for>
+                </div>
+                <div style="display:flex;gap:5px">
+                  <sc-for list="{{ bBars }}" as="b" hint-placeholder-count="7">
+                    <div style="flex:1;min-width:0;text-align:center;font-size:10px;font-weight:600;color:#9a9ca0;white-space:nowrap;overflow:hidden">{{ b.label }}<br><span style="color:#f4f4f2">{{ b.n }}</span></div>
+                  </sc-for>
+                </div>
+              </div>
+              <div style="border-radius:12px;border:1px solid #26282b;background:#111214;padding:2px 14px">
+                <sc-for list="{{ bHigh }}" as="h" hint-placeholder-count="3">
+                  <div style="display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid #26282b;font-size:14px"><span style="color:#9a9ca0">{{ h.k }}</span><span style="font-weight:700;text-align:right">{{ h.v }}</span></div>
+                </sc-for>
+              </div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="font:700 13px 'Barlow Condensed',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#9a9ca0">Conta</div>
+              <button onClick="{{ openPwB }}" style="height:50px;border-radius:12px;border:1px solid #26282b;background:#0d0e10;color:#f4f4f2;font-size:15px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:space-between;padding:0 16px"><span>Alterar palavra-passe</span><span style="color:#9a9ca0">›</span></button>
+              <button onClick="{{ exitBarber }}" style="height:50px;border-radius:12px;border:1px solid #26282b;background:#0d0e10;color:#ff6b6b;font-size:15px;font-weight:600;cursor:pointer">Terminar sessão</button>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ showBottomTabs }}" hint-placeholder-val="{{ false }}">
+      <div style="flex:none;height:84px;border-top:1px solid #1c1d1f;background:#000;display:grid;grid-template-columns:repeat(3,1fr);padding:8px 16px max(26px, env(safe-area-inset-bottom))">
+        <sc-for list="{{ tabs }}" as="tb" hint-placeholder-count="3">
+          <button onClick="{{ tb.onClick }}" style="border:none;background:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:{{ tb.color }};font-size:12px;font-weight:600">
+            <span style="width:22px;height:4px;border-radius:2px;background:{{ tb.line }}"></span>{{ tb.label }}
+          </button>
+        </sc-for>
+      </div>
+    </sc-if>
+    <sc-if value="{{ showBarberTabs }}" hint-placeholder-val="{{ false }}">
+      <div style="flex:none;height:84px;border-top:1px solid #1c1d1f;background:#000;display:grid;grid-template-columns:repeat(3,1fr);padding:8px 16px max(26px, env(safe-area-inset-bottom))">
+        <sc-for list="{{ bTabs }}" as="tb" hint-placeholder-count="3">
+          <button onClick="{{ tb.onClick }}" style="border:none;background:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:{{ tb.color }};font-size:12px;font-weight:600">
+            <span style="width:22px;height:4px;border-radius:2px;background:{{ tb.line }}"></span>{{ tb.label }}
+          </button>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ showBSheet }}" hint-placeholder-val="{{ false }}">
+      <div onClick="{{ closeBSheet }}" style="position:absolute;inset:0;z-index:5;background:rgba(0,0,0,.65);display:flex;align-items:flex-end">
+        <div onClick="{{ stop }}" style="width:100%;background:#111214;border-top:1px solid #26282b;border-radius:22px 22px 0 0;padding:14px 20px 34px;display:flex;flex-direction:column;gap:16px">
+          <div style="width:40px;height:4px;border-radius:2px;background:#3a3c40;align-self:center"></div>
+          <div style="display:flex;align-items:center;gap:14px">
+            <div style="width:52px;height:52px;border-radius:50%;background:#e8f23a;color:#000;display:flex;align-items:center;justify-content:center;font:800 24px 'Barlow Condensed',sans-serif">{{ bInitial }}</div>
+            <div style="display:flex;flex-direction:column"><span style="font:800 28px/1 'Barlow Condensed',sans-serif;text-transform:uppercase">{{ bName }}</span><span style="font-size:13px;color:#9a9ca0">{{ bUserId }} · Barbeiro</span></div>
+          </div>
+          <sc-if value="{{ bMenu }}" hint-placeholder-val="{{ true }}">
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <sc-if value="{{ pwOk }}" hint-placeholder-val="{{ false }}"><div style="font-size:14px;color:#e8f23a">Palavra-passe alterada.</div></sc-if>
+              <button onClick="{{ openPw }}" style="height:50px;border-radius:12px;border:1px solid #26282b;background:#0d0e10;color:#f4f4f2;font-size:15px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:space-between;padding:0 16px"><span>Alterar palavra-passe</span><span style="color:#9a9ca0">›</span></button>
+              <button onClick="{{ exitBarber }}" style="height:50px;border-radius:12px;border:1px solid #26282b;background:#0d0e10;color:#ff6b6b;font-size:15px;font-weight:600;cursor:pointer">Terminar sessão</button>
+            </div>
+          </sc-if>
+          <sc-if value="{{ bPwForm }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <div style="font:800 22px 'Barlow Condensed',sans-serif;text-transform:uppercase">Alterar palavra-passe</div>
+              <input value="{{ pwCur }}" onChange="{{ onPwCur }}" type="password" placeholder="Palavra-passe atual" autoComplete="current-password" style="height:50px;border-radius:12px;border:1px solid #26282b;background:#000;color:#f4f4f2;padding:0 16px;font-size:16px;outline:none" style-focus="border-color:#e8f23a">
+              <input value="{{ pwNew }}" onChange="{{ onPwNew }}" type="password" placeholder="Nova palavra-passe (mín. 6)" autoComplete="new-password" style="height:50px;border-radius:12px;border:1px solid #26282b;background:#000;color:#f4f4f2;padding:0 16px;font-size:16px;outline:none" style-focus="border-color:#e8f23a">
+              <input value="{{ pwNew2 }}" onChange="{{ onPwNew2 }}" type="password" placeholder="Repetir nova palavra-passe" autoComplete="new-password" style="height:50px;border-radius:12px;border:1px solid #26282b;background:#000;color:#f4f4f2;padding:0 16px;font-size:16px;outline:none" style-focus="border-color:#e8f23a">
+              <sc-if value="{{ hasPwErr }}" hint-placeholder-val="{{ false }}"><span style="font-size:14px;color:#ff6b6b">{{ pwErr }}</span></sc-if>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+                <button onClick="{{ cancelPw }}" style="height:48px;border-radius:10px;border:1px solid #3a3c40;background:none;color:#f4f4f2;font:700 17px 'Barlow Condensed',sans-serif;text-transform:uppercase;cursor:pointer">Voltar</button>
+                <button onClick="{{ savePw }}" style="height:48px;border-radius:10px;border:none;background:#e8f23a;color:#000;font:800 17px 'Barlow Condensed',sans-serif;text-transform:uppercase;cursor:pointer">Guardar</button>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ showCancel }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;inset:0;z-index:5;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;padding:20px">
+        <div style="width:100%;border-radius:18px;border:1px solid #26282b;background:#111214;padding:22px;display:flex;flex-direction:column;gap:14px">
+          <div style="font:800 28px/1 'Barlow Condensed',sans-serif;text-transform:uppercase">Cancelar marcação?</div>
+          <div style="font-size:15px;line-height:1.5;color:#c9cacc">{{ cancelBody }}</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px">
+            <button onClick="{{ closeCancel }}" style="height:48px;border-radius:10px;border:1px solid #3a3c40;background:none;color:#f4f4f2;font:700 17px 'Barlow Condensed',sans-serif;text-transform:uppercase;cursor:pointer">Manter</button>
+            <button onClick="{{ doCancel }}" style="height:48px;border-radius:10px;border:none;background:#ff6b6b;color:#000;font:800 17px 'Barlow Condensed',sans-serif;text-transform:uppercase;cursor:pointer">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ showDetail }}" hint-placeholder-val="{{ false }}">
+      <div onClick="{{ closeDetail }}" style="position:absolute;inset:0;z-index:5;background:rgba(0,0,0,.65);display:flex;align-items:flex-end">
+        <div onClick="{{ stop }}" style="width:100%;background:#111214;border-top:1px solid #26282b;border-radius:22px 22px 0 0;padding:14px 20px 34px;display:flex;flex-direction:column;gap:16px">
+          <div style="width:40px;height:4px;border-radius:2px;background:#3a3c40;align-self:center"></div>
+          <div style="display:flex;justify-content:space-between;align-items:flex-start">
+            <div><div style="font:700 13px 'Barlow Condensed',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#e8f23a">{{ det.when }}</div><div style="font:800 34px/1 'Barlow Condensed',sans-serif;text-transform:uppercase;margin-top:4px">{{ det.client }}</div></div>
+            <span style="font-size:12px;font-weight:700;border-radius:6px;padding:3px 8px;background:{{ det.tagBg }};color:{{ det.tagFg }};border:1px solid {{ det.tagBorder }}">{{ det.status }}</span>
+          </div>
+          <div style="display:flex;flex-direction:column">
+            <sc-for list="{{ det.rows }}" as="r" hint-placeholder-count="4">
+              <div style="display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid #26282b;font-size:15px"><span style="color:#9a9ca0">{{ r.k }}</span><span style="text-align:right;font-weight:600">{{ r.v }}</span></div>
+            </sc-for>
+          </div>
+          <sc-if value="{{ det.actionable }}" hint-placeholder-val="{{ true }}">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+              <button onClick="{{ det.onNoShow }}" style="height:50px;border-radius:10px;border:1px solid #3a3c40;background:none;color:#ff6b6b;font:700 17px 'Barlow Condensed',sans-serif;text-transform:uppercase;cursor:pointer">Faltou</button>
+              <button onClick="{{ det.onDone }}" style="height:50px;border-radius:10px;border:none;background:#e8f23a;color:#000;font:800 17px 'Barlow Condensed',sans-serif;text-transform:uppercase;cursor:pointer">Concluído</button>
+            </div>
+          </sc-if>
+          <sc-if value="{{ det.reopenable }}" hint-placeholder-val="{{ false }}">
+            <button onClick="{{ det.onReopen }}" style="align-self:center;border:none;background:none;color:#e8f23a;font-size:15px;font-weight:600;cursor:pointer">Desfazer</button>
+          </sc-if>
+        </div>
+      </div>
+    </sc-if>
+
+    <div onClick="{{ hideNotif }}" style="position:absolute;top:{{ notifTop }};left:10px;right:10px;z-index:8;border-radius:22px;background:rgba(38,39,42,.94);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:12px 14px;display:flex;gap:12px;align-items:flex-start;box-shadow:0 12px 30px rgba(0,0,0,.5);cursor:pointer;transform:translateY({{ notifY }});opacity:{{ notifOp }};transition:transform .45s cubic-bezier(.2,.9,.3,1.1),opacity .3s">
+      <img src="assets/logo.png" alt="" style="width:38px;height:38px;flex:none;border-radius:10px;background:#000">
+      <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1px"><div style="display:flex;justify-content:space-between;font-size:12px;color:#a9abaf"><span style="font-weight:600;text-transform:uppercase;letter-spacing:.04em">Twenty Two</span><span>agora</span></div><span style="font-size:15px;font-weight:700">{{ notif.title }}</span><span style="font-size:14px;color:#d6d7d9;line-height:1.3">{{ notif.body }}</span></div>
+    </div>
+    <sc-if value="{{ showFakeStatus }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:#f4f4f2;z-index:6"></div></sc-if>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const SERVICES = [
+  { id: 'combo', name: 'Cabelo + barba', dur: 60, price: 18 },
+  { id: 'fade', name: 'Corte degradê', dur: 30, price: 15 },
+  { id: 'social', name: 'Corte social', dur: 30, price: 12 },
+  { id: 'beard', name: 'Barba', dur: 30, price: 7 },
+  { id: 'kids', name: 'Corte criança', dur: 30, price: 10 },
+];
+const COUNTRIES = [
+  { code: 'PT', name: 'Portugal', dial: '+351', len: 9, groups: [3,3,3], ph: '912 345 678' },
+  { code: 'BR', name: 'Brasil', dial: '+55', len: 11, groups: [2,5,4], ph: '91 23456 7890' },
+  { code: 'ES', name: 'Espanha', dial: '+34', len: 9, groups: [3,3,3], ph: '912 345 678' },
+  { code: 'FR', name: 'França', dial: '+33', len: 9, groups: [1,2,2,2,2], ph: '9 12 34 56 78' },
+  { code: 'GB', name: 'Reino Unido', dial: '+44', len: 10, groups: [4,6], ph: '9123 456789' },
+  { code: 'DE', name: 'Alemanha', dial: '+49', len: 11, groups: [4,7], ph: '9123 4567890' },
+  { code: 'IT', name: 'Itália', dial: '+39', len: 10, groups: [3,3,4], ph: '912 345 6789' },
+  { code: 'NL', name: 'Países Baixos', dial: '+31', len: 9, groups: [1,4,4], ph: '9 1234 5678' },
+  { code: 'BE', name: 'Bélgica', dial: '+32', len: 9, groups: [3,2,2,2], ph: '912 34 56 78' },
+  { code: 'LU', name: 'Luxemburgo', dial: '+352', len: 9, groups: [3,3,3], ph: '912 345 678' },
+  { code: 'CH', name: 'Suíça', dial: '+41', len: 9, groups: [2,3,2,2], ph: '91 234 56 78' },
+  { code: 'AT', name: 'Áustria', dial: '+43', len: 10, groups: [3,7], ph: '912 3456789' },
+  { code: 'IE', name: 'Irlanda', dial: '+353', len: 9, groups: [2,3,4], ph: '91 234 5678' },
+  { code: 'DK', name: 'Dinamarca', dial: '+45', len: 8, groups: [2,2,2,2], ph: '91 23 45 67' },
+  { code: 'SE', name: 'Suécia', dial: '+46', len: 9, groups: [2,3,2,2], ph: '91 234 56 78' },
+  { code: 'NO', name: 'Noruega', dial: '+47', len: 8, groups: [3,2,3], ph: '912 34 567' },
+  { code: 'FI', name: 'Finlândia', dial: '+358', len: 9, groups: [2,3,4], ph: '91 234 5678' },
+  { code: 'PL', name: 'Polónia', dial: '+48', len: 9, groups: [3,3,3], ph: '912 345 678' },
+  { code: 'CZ', name: 'Chéquia', dial: '+420', len: 9, groups: [3,3,3], ph: '912 345 678' },
+  { code: 'RO', name: 'Roménia', dial: '+40', len: 9, groups: [3,3,3], ph: '912 345 678' },
+  { code: 'GR', name: 'Grécia', dial: '+30', len: 10, groups: [3,3,4], ph: '912 345 6789' },
+  { code: 'UA', name: 'Ucrânia', dial: '+380', len: 9, groups: [2,3,2,2], ph: '91 234 56 78' },
+  { code: 'AD', name: 'Andorra', dial: '+376', len: 6, groups: [3,3], ph: '912 345' },
+  { code: 'AO', name: 'Angola', dial: '+244', len: 9, groups: [3,3,3], ph: '912 345 678' },
+  { code: 'CV', name: 'Cabo Verde', dial: '+238', len: 7, groups: [3,2,2], ph: '912 34 56' },
+  { code: 'MZ', name: 'Moçambique', dial: '+258', len: 9, groups: [2,3,4], ph: '91 234 5678' },
+  { code: 'GW', name: 'Guiné-Bissau', dial: '+245', len: 9, groups: [3,3,3], ph: '912 345 678' },
+  { code: 'ST', name: 'São Tomé e Príncipe', dial: '+239', len: 7, groups: [3,4], ph: '912 3456' },
+  { code: 'TL', name: 'Timor-Leste', dial: '+670', len: 8, groups: [4,4], ph: '9123 4567' },
+  { code: 'MA', name: 'Marrocos', dial: '+212', len: 9, groups: [3,6], ph: '912 345678' },
+  { code: 'ZA', name: 'África do Sul', dial: '+27', len: 9, groups: [2,3,4], ph: '91 234 5678' },
+  { code: 'NG', name: 'Nigéria', dial: '+234', len: 10, groups: [3,3,4], ph: '912 345 6789' },
+  { code: 'US', name: 'Estados Unidos', dial: '+1', len: 10, groups: [3,3,4], ph: '912 345 6789' },
+  { code: 'CA', name: 'Canadá', dial: '+1', len: 10, groups: [3,3,4], ph: '912 345 6789' },
+  { code: 'MX', name: 'México', dial: '+52', len: 10, groups: [2,4,4], ph: '91 2345 6789' },
+  { code: 'AR', name: 'Argentina', dial: '+54', len: 10, groups: [2,4,4], ph: '91 2345 6789' },
+  { code: 'CO', name: 'Colômbia', dial: '+57', len: 10, groups: [3,3,4], ph: '912 345 6789' },
+  { code: 'VE', name: 'Venezuela', dial: '+58', len: 10, groups: [3,3,4], ph: '912 345 6789' },
+  { code: 'CL', name: 'Chile', dial: '+56', len: 9, groups: [1,4,4], ph: '9 1234 5678' },
+  { code: 'PE', name: 'Peru', dial: '+51', len: 9, groups: [3,3,3], ph: '912 345 678' },
+  { code: 'UY', name: 'Uruguai', dial: '+598', len: 8, groups: [2,3,3], ph: '91 234 567' },
+  { code: 'IN', name: 'Índia', dial: '+91', len: 10, groups: [5,5], ph: '91234 56789' },
+  { code: 'CN', name: 'China', dial: '+86', len: 11, groups: [3,4,4], ph: '912 3456 7890' },
+  { code: 'AE', name: 'Emirados Árabes Unidos', dial: '+971', len: 9, groups: [2,3,4], ph: '91 234 5678' },
+  { code: 'TR', name: 'Turquia', dial: '+90', len: 10, groups: [3,3,4], ph: '912 345 6789' },
+  { code: 'AU', name: 'Austrália', dial: '+61', len: 9, groups: [3,3,3], ph: '912 345 678' },
+];
+const flag = c => String.fromCodePoint(...[...c].map(ch => 0x1F1E6 + ch.charCodeAt(0) - 65));
+const fmtPhone = (digits, groups) => { const out = []; let i = 0; for (const g of groups) { if (i >= digits.length) break; out.push(digits.slice(i, i + g)); i += g; } return out.join(' '); };
+const Y = '#e8f23a', LINE = '#26282b', CARD = '#111214', MUTED = '#9a9ca0', TXT = '#f4f4f2', RED = '#ff6b6b';
+const DOW = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+const DOWL = ['domingo','segunda','terça','quarta','quinta','sexta','sábado'];
+const MON = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+const MONL = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+const TODAY = new Date(); TODAY.setHours(0, 0, 0, 0);
+const NDAYS = 60;
+const DATES = Array.from({ length: NDAYS }, (_, i) => new Date(TODAY.getFullYear(), TODAY.getMonth(), TODAY.getDate() + i));
+const isoOf = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+const idxOfIso = s => { const [y, m, d] = s.split('-').map(Number); return Math.round((new Date(y, m - 1, d) - TODAY) / 864e5); };
+let NOWHM = (() => { const n = new Date(); return `${String(n.getHours()).padStart(2, '0')}:${String(n.getMinutes()).padStart(2, '0')}`; })();
+const KEY = 'twentytwo-app-v1';
+const ADDRESS = 'Rua Professor Fernando Magano 47';
+// Google Apps Script (conta noreply.twentytwobarbershop): colar aqui o URL da App Web ("Implementar" → "App Web")
+const SCRIPT_URL = '';
+const SCRIPT_KEY = 'tt22-7f3k9q';
+// Iniciar sessão com Google / Apple: vazio = simulação. Preencher para funcionar a sério (só no site publicado, ex.: GitHub Pages)
+const GOOGLE_CLIENT_ID = '';   // console.cloud.google.com → APIs e serviços → Credenciais → ID de cliente OAuth (Aplicação Web)
+const APPLE_CLIENT_ID = '';    // developer.apple.com → Identifiers → Services ID (precisa do Apple Developer Program)
+const APP_URL = location.origin + location.pathname;
+const BARBERS = [
+  { id: 'filipe.bessa22', name: 'Filipe Bessa', short: 'Filipe', pass: '22barber22' },
+  { id: 'samu22barber', name: 'Samuel', short: 'Samuel', pass: '22samu22' },
+];
+const TIMES = [];
+for (let h = 10; h < 19; h++) for (const m of ['00', '30']) TIMES.push(`${String(h).padStart(2, '0')}:${m}`);
+const closed = i => [0, 1].includes(DATES[i].getDay());
+const svc = id => SERVICES.find(s => s.id === id);
+const cap = s => s[0].toUpperCase() + s.slice(1);
+const fmt = i => `${DOW[DATES[i].getDay()]}, ${DATES[i].getDate()} ${MON[DATES[i].getMonth()]}`;
+const fmtLong = i => `${cap(DOWL[DATES[i].getDay()])}, ${DATES[i].getDate()} ${MON[DATES[i].getMonth()]}`;
+const SEED = [];
+const eur = n => Number.isInteger(n) ? `${n}€` : `${n.toFixed(2).replace('.', ',')}€`;
+const priceOf = a => a.price ?? svc(a.service).price;
+const busy = (di, ti) => di === 0 && TIMES[ti] <= NOWHM;
+const bName = id => (BARBERS.find(b => b.id === id) || BARBERS[0]).name;
+
+class Component extends DCLogic {
+  state = {
+    mode: 'client', onb: 'welcome', name: '', phone: '', country: 'PT', email: '', birth: '', visits: 0, notif: null, notifOn: false, emails: [], sms: [], channel: 'whatsapp', view: 'home', step: 1,
+    service: null, date: null, time: null, payType: 'shop', method: 'mbway', paying: false,
+    editingId: null, cancelId: null, cal: false, lastDone: null, appts: SEED, bDay: 0, detailId: null,
+    past: [],
+    calOff: 0, isMobile: false, framed: false, standalone: false, perm: 'default', barberAuth: false, barberId: null, barberPw: {}, bSheet: null, pwCur: '', pwNew: '', pwNew2: '', pwErr: '', pwOk: false, bUser: '', bPass: '', bErr: false, password: '',
+  };
+  componentDidMount() {
+    setTimeout(() => this.sync(), 300);
+    this._sync = setInterval(() => this.sync(), 60000);
+    this._tick = setInterval(() => {
+      const n = new Date(); NOWHM = `${String(n.getHours()).padStart(2, '0')}:${String(n.getMinutes()).padStart(2, '0')}`;
+      this.setState({ now: n.getTime() });
+    }, 1000);
+    this._vis = () => { if (document.visibilityState === 'visible') this.sync(); };
+    document.addEventListener('visibilitychange', this._vis);
+    try {
+      const raw = localStorage.getItem(KEY);
+      if (raw) {
+        const d = JSON.parse(raw); const past = d.past || this.state.past;
+        const appts = (d.appts || []).map(a => ({ ...a, date: idxOfIso(a.iso) })).filter(a => {
+          if (a.date >= 0) return true;
+          if (a.mine && a.status !== 'cancelled') past.unshift({ service: a.service, barber: a.barber, label: `${new Date(a.iso).getDate()} ${MON[new Date(a.iso).getMonth()]} ${new Date(a.iso).getFullYear()}` });
+          return false;
+        });
+        this.setState({ ...d, appts, past, notifOn: false, view: 'home', mode: d.barberAuth ? 'barber' : 'client', onb: d.barberAuth ? null : d.onb });
+      }
+    } catch (e) {}
+    this._mq = window.matchMedia('(max-width: 600px), (pointer: coarse) and (max-width: 1024px)');
+    this._mqf = () => this.setState({ isMobile: this._mq.matches, standalone: window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true });
+    this._mqf(); this._mq.addEventListener('change', this._mqf);
+    if ('Notification' in window) this.setState({ perm: Notification.permission });
+
+    if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
+  }
+  componentDidUpdate() {
+    const s = this.state;
+    const keep = { provider: s.provider || null, onb: s.onb, name: s.name, phone: s.phone, country: s.country, email: s.email, birth: s.birth, visits: s.visits, channel: s.channel, past: s.past, emails: s.emails.slice(0, 5), sms: (s.sms || []).slice(0, 5), barberAuth: s.barberAuth, barberId: s.barberId, barberPw: s.barberPw, password: s.password,
+      appts: s.appts.map(a => ({ ...a, iso: isoOf(DATES[Math.min(Math.max(a.date, 0), NDAYS - 1)]) })) };
+    const str = JSON.stringify(keep);
+    if (str !== this._saved) { this._saved = str; try { localStorage.setItem(KEY, str); } catch (e) {} }
+  }
+  sysNotify(n) {
+    if (!('Notification' in window) || Notification.permission !== 'granted') return;
+    const opts = { body: n.body, icon: 'assets/icon-192.png', badge: 'assets/icon-192.png' };
+    if (navigator.serviceWorker && navigator.serviceWorker.getRegistration) navigator.serviceWorker.getRegistration().then(r => r ? r.showNotification(n.title, opts) : new Notification(n.title, opts)).catch(() => { try { new Notification(n.title, opts); } catch (e) {} });
+    else { try { new Notification(n.title, opts); } catch (e) {} }
+  }
+  downloadIcs(a) {
+    const d = DATES[a.date]; const [h, m] = a.time.split(':').map(Number);
+    const st = new Date(d.getFullYear(), d.getMonth(), d.getDate(), h, m); const en = new Date(st.getTime() + svc(a.service).dur * 60000);
+    const z = t => t.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+    const ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//TwentyTwo//PT', 'BEGIN:VEVENT', `UID:${a.id}@twentytwo`, `DTSTAMP:${z(new Date())}`, `DTSTART:${z(st)}`, `DTEND:${z(en)}`, `SUMMARY:${svc(a.service).name} · Twenty Two Barbershop`, 'BEGIN:VALARM', 'TRIGGER:-PT24H', 'ACTION:DISPLAY', 'DESCRIPTION:Lembrete Twenty Two', 'END:VALARM', 'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
+    const url = URL.createObjectURL(new Blob([ics], { type: 'text/calendar' }));
+    const el = document.createElement('a'); el.href = url; el.download = `${svc(a.service).name.toLowerCase().replace(/\s+/g, '')}.ics`; document.body.appendChild(el); el.click(); el.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 2000);
+  }
+  isBday(di) { const b = this.state.birth; if (!b || di === null || di < 0 || di >= NDAYS) return false; const [, m, d] = b.split('-').map(Number); return DATES[di].getMonth() + 1 === m && DATES[di].getDate() === d; }
+  freeBooked() { const s = this.state; return s.appts.some(a => a.mine && a.status === 'booked' && a.disc === 'free' && a.id !== s.editingId); }
+  freeAvail() { return this.state.visits % 10 === 9 && !this.freeBooked(); }
+  quote(serviceId, di) { const base = svc(serviceId).price; if (this.freeAvail()) return { base, price: 0, disc: 'free' }; if (this.isBday(di)) return { base, price: Math.round(base * 90) / 100, disc: 'bday' }; return { base, price: base, disc: null }; }
+  post(action, a) {
+    if (!SCRIPT_URL || !a || !action) return;
+    const s = this.state; const sv = svc(a.service);
+    const body = { key: SCRIPT_KEY, action, id: String(a.id), email: s.email, name: (s.name.trim() || '').split(' ')[0], phone: this.phoneFull(),
+      service: sv.name, barber: bName(a.barber), date: isoOf(DATES[a.date]), time: a.time, dur: sv.dur, price: eur(priceOf(a)), address: ADDRESS, app: APP_URL, birth: s.birth || '' };
+    fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body) }).catch(() => {});
+  }
+  statusPost(a, status) {
+    if (!SCRIPT_URL || !a) return;
+    fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ key: SCRIPT_KEY, action: 'status', id: String(a.id), status }) }).catch(() => {});
+  }
+  sync() {
+    if (!SCRIPT_URL) return;
+    fetch(SCRIPT_URL + '?key=' + encodeURIComponent(SCRIPT_KEY) + '&action=list').then(r => r.json()).then(res => {
+      if (!res || !res.ok || !Array.isArray(res.rows)) return;
+      const st = { marcada: 'booked', cancelada: 'cancelled', concluida: 'done', faltou: 'noshow' };
+      this.setState(s => {
+        const local = new Map(s.appts.map(a => [String(a.id), a]));
+        const remote = [];
+        res.rows.forEach(r => {
+          const di = idxOfIso(r.date); if (di < 0 || di >= NDAYS) return;
+          const service = (SERVICES.find(x => x.name === r.service) || SERVICES[0]).id;
+          const barber = (BARBERS.find(b => b.name === r.barber) || BARBERS[0]).id;
+          const mine = !!s.email && String(r.email).toLowerCase() === s.email.trim().toLowerCase();
+          const prev = local.get(String(r.id));
+          remote.push({ ...(prev || {}), id: prev ? prev.id : r.id, client: r.name || 'Cliente', service, barber, date: di, time: r.time, status: st[r.status] || 'booked', paid: prev ? prev.paid : 0, note: prev ? prev.note : '', mine: prev ? prev.mine : mine, remote: true });
+          local.delete(String(r.id));
+        });
+        return { appts: [...remote, ...[...local.values()].filter(a => !a.remote)] };
+      });
+    }).catch(() => {});
+  }
+  sendEmail(e) { if (e && e.appt) this.post(e.kind === 'resched' ? 'resched' : e.kind === 'reminder' ? null : 'book', e.appt); }
+  notify(n, email) {
+    this.sendEmail(email);
+    clearTimeout(this._nt);
+    this.setState(st => ({ notif: n, notifOn: true, emails: email ? [email, ...st.emails] : st.emails }));
+    this._nt = setTimeout(() => this.setState({ notifOn: false }), 4500);
+    this.sysNotify(n);
+  }
+  startOf(a) { const d = DATES[a.date]; const [h, m] = a.time.split(':').map(Number); return new Date(d.getFullYear(), d.getMonth(), d.getDate(), h, m).getTime(); }
+  nextFor(bid) { const now = Date.now(); return this.state.appts.filter(a => a.status === 'booked' && (a.barber || BARBERS[0].id) === bid && a.date >= 0 && a.date < NDAYS && this.startOf(a) > now).sort((a, b) => this.startOf(a) - this.startOf(b))[0]; }
+  repRange(p, off) {
+    const D = (Y, M, d) => new Date(Y, M, d);
+    const base = o => {
+      const t = D(TODAY.getFullYear(), TODAY.getMonth(), TODAY.getDate()), y = t.getFullYear(), m = t.getMonth();
+      let a, b, label; const buckets = [];
+      if (p === 'week') {
+        a = D(y, m, t.getDate() - ((t.getDay() + 6) % 7) + 7 * o); b = D(a.getFullYear(), a.getMonth(), a.getDate() + 7);
+        for (let i = 0; i < 7; i++) { const x = D(a.getFullYear(), a.getMonth(), a.getDate() + i); buckets.push([x, D(x.getFullYear(), x.getMonth(), x.getDate() + 1), DOW[x.getDay()]]); }
+        const e = D(b.getFullYear(), b.getMonth(), b.getDate() - 1);
+        label = `${a.getDate()} ${MON[a.getMonth()]} – ${e.getDate()} ${MON[e.getMonth()]} ${e.getFullYear()}`;
+      } else if (p === 'month') {
+        a = D(y, m + o, 1); b = D(y, m + o + 1, 1);
+        for (let d = 1; ; d += 7) { const x = D(a.getFullYear(), a.getMonth(), d); if (x >= b) break; let e = D(a.getFullYear(), a.getMonth(), d + 7); if (e > b) e = b; buckets.push([x, e, `${d}–${D(e.getFullYear(), e.getMonth(), e.getDate() - 1).getDate()}`]); }
+        label = `${cap(MONL[a.getMonth()])} ${a.getFullYear()}`;
+      } else {
+        const n = p === 'quarter' ? 3 : p === 'half' ? 6 : 12;
+        a = p === 'year' ? D(y + o, 0, 1) : D(y, Math.floor(m / n) * n + n * o, 1); b = D(a.getFullYear(), a.getMonth() + n, 1);
+        for (let i = 0; i < n; i++) { const x = D(a.getFullYear(), a.getMonth() + i, 1); buckets.push([x, D(x.getFullYear(), x.getMonth() + 1, 1), cap(MON[x.getMonth()])]); }
+        label = p === 'quarter' ? `${Math.floor(a.getMonth() / 3) + 1}.º trimestre ${a.getFullYear()}` : p === 'half' ? `${a.getMonth() < 6 ? 1 : 2}.º semestre ${a.getFullYear()}` : `${a.getFullYear()}`;
+      }
+      return { a, b, buckets, label };
+    };
+    const cur = base(off), prev = base(off - 1);
+    const end = D(TODAY.getFullYear(), TODAY.getMonth(), TODAY.getDate() + 1);
+    const openDays = (a, b) => { let n = 0; for (let x = new Date(a); x < b && x < end; x = D(x.getFullYear(), x.getMonth(), x.getDate() + 1)) if (![0, 1].includes(x.getDay())) n++; return n; };
+    return { ...cur, prevA: prev.a, prevB: prev.b, open: openDays(cur.a, cur.b), bucketOpen: cur.buckets.map(([x, e]) => openDays(x, e)), prevOpen: openDays(prev.a, prev.b) };
+  }
+  loadReport(p, off) {
+    const s = this.state; const bid = s.barberId || BARBERS[0].id; const key = `${bid}|${p}|${off}`;
+    const r = this.repRange(p, off);
+    this.setState({ bRepP: p, bRepOff: off, bRepKey: key, bRepLoading: true });
+    const demo = () => {
+      let seed = 0; for (const c of key) seed = (seed * 31 + c.charCodeAt(0)) >>> 0;
+      const rnd = () => { seed = (seed + 0x6D2B79F5) >>> 0; let t = seed; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+      const agg = days => { const feitos = Math.round(days * (6 + rnd() * 4)); return { feitos, fat: Math.round(feitos * (12.5 + rnd() * 3)), faltas: Math.round(feitos * (0.02 + rnd() * 0.04)), canceladas: Math.round(feitos * (0.03 + rnd() * 0.05)), clientes: Math.round(feitos * 0.72), novos: Math.round(feitos * (0.1 + rnd() * 0.1)), horas: Math.round(feitos * 0.6), topServico: SERVICES[Math.floor(rnd() * SERVICES.length)].name, topDia: ['terça', 'quarta', 'quinta', 'sexta', 'sábado'][Math.floor(rnd() * 5)] }; };
+      const buckets = r.bucketOpen.map(d => { const f = Math.round(d * (6 + rnd() * 4)); return { cortes: f, fat: Math.round(f * (12.5 + rnd() * 3)) }; });
+      const cur = agg(r.open); cur.feitos = buckets.reduce((t, x) => t + x.cortes, 0); cur.fat = buckets.reduce((t, x) => t + x.fat, 0); cur.clientes = Math.round(cur.feitos * 0.72); cur.horas = Math.round(cur.feitos * 0.6);
+      return { cur, prev: agg(r.prevOpen), buckets };
+    };
+    const done = (data, isDemo) => { if (this.state.bRepKey === key) this.setState({ bRep: data, bRepDemo: isDemo, bRepLoading: false }); };
+    if (!SCRIPT_URL) return done(demo(), true);
+    const range = { cur: [isoOf(r.a), isoOf(r.b)], prev: [isoOf(r.prevA), isoOf(r.prevB)], buckets: r.buckets.map(([x, e]) => [isoOf(x), isoOf(e)]) };
+    fetch(SCRIPT_URL + '?key=' + encodeURIComponent(SCRIPT_KEY) + '&action=report&barber=' + encodeURIComponent(bName(bid)) + '&r=' + encodeURIComponent(JSON.stringify(range)))
+      .then(x => x.json()).then(res => res && res.ok ? done(res, false) : done(demo(), true)).catch(() => done(demo(), true));
+  }
+  openBProfile() { this.setState({ bProf: true, bCal: false, bSheet: null, pwOk: false }); this.loadReport(this.state.bRepP || 'week', 0); }
+  loadScript(src) { return new Promise((ok, ko) => { if (document.querySelector(`script[src="${src}"]`)) return ok(); const el = document.createElement('script'); el.src = src; el.async = true; el.onload = ok; el.onerror = ko; document.head.appendChild(el); }); }
+  jwt(t) { try { const b = t.split('.')[1].replace(/-/g, '+').replace(/_/g, '/'); return JSON.parse(decodeURIComponent(escape(atob(b)))); } catch (e) { return {}; } }
+  socialDone(provider, info, demo) {
+    const s = this.state; const email = String(info.email || '').toLowerCase();
+    const known = !!s.phone && !!s.birth && !!s.email && s.email.toLowerCase() === email;
+    this.setState({ provider, providerDemo: !!demo, email: email || s.email, name: info.name || s.name, mode: 'client', onb: known ? null : 'social' });
+  }
+  socialLogin(kind) {
+    const fail = msg => this.notify({ title: kind === 'apple' ? 'Apple' : 'Google', body: msg });
+    if (kind === 'google') {
+      if (!GOOGLE_CLIENT_ID) return this.socialDone('google', { name: 'Rui Costa', email: 'rui.costa@gmail.com' }, true);
+      this.loadScript('https://accounts.google.com/gsi/client').then(() => {
+        window.google.accounts.oauth2.initTokenClient({ client_id: GOOGLE_CLIENT_ID, scope: 'openid email profile', callback: t => {
+          if (!t || !t.access_token) return fail('Início de sessão cancelado.');
+          fetch('https://www.googleapis.com/oauth2/v3/userinfo', { headers: { Authorization: 'Bearer ' + t.access_token } }).then(r => r.json())
+            .then(u => this.socialDone('google', { name: u.name, email: u.email })).catch(() => fail('Não foi possível ler a conta Google.'));
+        } }).requestAccessToken();
+      }).catch(() => fail('Não foi possível contactar o Google.'));
+    } else {
+      if (!APPLE_CLIENT_ID) return this.socialDone('apple', { name: 'Rui Costa', email: 'k7x2m9qp@privaterelay.appleid.com' }, true);
+      this.loadScript('https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/pt_PT/appleid.auth.js').then(() => {
+        window.AppleID.auth.init({ clientId: APPLE_CLIENT_ID, scope: 'name email', redirectURI: APP_URL, usePopup: true });
+        return window.AppleID.auth.signIn();
+      }).then(r => {
+        const p = this.jwt(r.authorization.id_token); const n = r.user && r.user.name ? [r.user.name.firstName, r.user.name.lastName].filter(Boolean).join(' ') : '';
+        this.socialDone('apple', { name: n, email: p.email });
+      }).catch(() => fail('Início de sessão cancelado ou indisponível.'));
+    }
+  }
+  componentWillUnmount() { clearTimeout(this._nt); clearInterval(this._sync); clearInterval(this._tick); document.removeEventListener('visibilitychange', this._vis); if (this._mq) this._mq.removeEventListener('change', this._mqf); }
+  phoneFull() { const s = this.state; const c = COUNTRIES.find(x => x.code === s.country); return s.phone ? `${c.dial} ${s.phone}` : '+351 912 345 678'; }
+  emailFor(a, kind) {
+    const s = this.state; const p = priceOf(a); const d = DATES[a.date]; const sv = svc(a.service);
+    const [h, m] = a.time.split(':').map(Number);
+    const st = new Date(d.getFullYear(), d.getMonth(), d.getDate(), h, m), en = new Date(st.getTime() + sv.dur * 60000);
+    const z = t => t.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+    const gcal = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + encodeURIComponent(sv.name + ' · Twenty Two Barbershop') + '&dates=' + z(st) + '/' + z(en) + '&location=' + encodeURIComponent(ADDRESS) + '&details=' + encodeURIComponent('Com ' + bName(a.barber));
+    const first = (s.name.trim() || 'Sam').split(' ')[0];
+    return { kind, appt: a, to: s.email || 'sam@email.pt', apptId: a.id, canCancel: kind !== 'cancel',
+      subject: kind === 'reminder' ? `Lembrete: amanhã às ${a.time}` : kind === 'resched' ? 'Marcação alterada' : 'Marcação confirmada',
+      headline: kind === 'reminder' ? 'Até amanhã!' : kind === 'resched' ? 'Marcação alterada!' : 'Marcação confirmada!',
+      hello: `Olá ${first}!`,
+      intro: kind === 'reminder' ? 'A tua marcação é daqui a 24 horas.' : kind === 'resched' ? 'A tua marcação mudou de hora. Até breve!' : 'A tua hora está reservada. Até breve!',
+      rows: [{ k: 'Serviço', v: sv.name }, { k: 'Barbeiro', v: bName(a.barber) }, { k: 'Data', v: `${cap(DOWL[d.getDay()])}-feira, ${d.getDate()} de ${MONL[d.getMonth()]}`.replace('Sábado-feira', 'Sábado').replace('Domingo-feira', 'Domingo') }, { k: 'Hora', v: a.time }, { k: 'Preço', v: eur(p) }, { k: 'Morada', v: ADDRESS }],
+      gcal, file: `${sv.name.toLowerCase().replace(/\s+/g, '')}.ics`, icsName: `${sv.name.toLowerCase().replace(/\s+/g, '')}.ics` };
+  }
+  open(pre = {}) { this.setState({ view: 'flow', step: 1, service: null, date: null, time: null, barber: null, payType: 'shop', editingId: null, paying: false, ...pre }); }
+  isTaken(di, ti, bid) { const s = this.state; const b = bid || s.barber || BARBERS[0].id; const bi = BARBERS.findIndex(x => x.id === b); return busy(di, ti, bi) || s.appts.some(a => a.date === di && a.time === TIMES[ti] && a.status !== 'cancelled' && a.id !== s.editingId && (a.barber || BARBERS[0].id) === b); }
+  canNext() { const s = this.state; return s.step === 1 ? !!s.service : s.step === 2 ? !!s.barber : s.step === 3 ? s.date !== null && !!s.time : !s.paying; }
+  confirm() {
+    const s = this.state;
+    const q = this.quote(s.service, s.date);
+    if (s.editingId) {
+      const appts = s.appts.map(a => a.id === s.editingId ? { ...a, date: s.date, time: s.time, service: s.service, barber: s.barber } : a);
+      const a = appts.find(x => x.id === s.editingId);
+      this.setState({ appts, view: 'done', cal: false, lastDone: { ...a, resched: true } });
+      return this.notify({ title: 'Marcação alterada', body: `${svc(a.service).name} · ${fmt(a.date)} às ${a.time}` }, this.emailFor(a, 'resched'));
+    }
+    const instant = q.price === 0 || s.payType === 'shop';
+    this.setState({ paying: true });
+    const go = () => setTimeout(() => {
+      const appt = { id: Date.now(), client: 'me', mine: true, barber: s.barber, service: s.service, date: s.date, time: s.time, price: q.price, disc: q.disc, paid: q.price === 0 || s.payType === 'shop' ? 0 : q.price, status: 'booked', note: '' };
+      this.setState(st => ({ appts: [...st.appts, appt], view: 'done', paying: false, cal: false, lastDone: appt }));
+      this.notify({ title: q.disc === 'free' ? 'Corte grátis marcado' : 'Marcação confirmada', body: `${svc(appt.service).name} · ${fmt(appt.date)} às ${appt.time}. Lembramos-te 24 h antes.` }, this.emailFor(appt, 'confirm'));
+    }, instant ? 300 : 1100);
+    if (!SCRIPT_URL || (!s.email && !s.phone)) return go();
+    fetch(SCRIPT_URL + '?key=' + encodeURIComponent(SCRIPT_KEY) + '&action=check&email=' + encodeURIComponent(s.email || '') + '&phone=' + encodeURIComponent(s.phone ? this.phoneFull() : ''))
+      .then(r => r.json()).then(res => {
+        if (res && res.blocked) {
+          this.setState({ paying: false });
+          this.notify({ title: 'Marcação online indisponível', body: `Tens ${res.faltas} faltas registadas. Liga para a barbearia${res.phone ? ' (' + res.phone + ')' : ''} para marcar.` });
+        } else go();
+      }).catch(go);
+  }
+  renderVals() {
+    const s = this.state;
+    const me = s.name.trim() || 'Sam';
+    const client = s.mode === 'client';
+    const mine = s.appts.filter(a => a.mine && a.status === 'booked').sort((a, b) => a.date - b.date || a.time.localeCompare(b.time));
+    const nx = mine[0];
+    const sv = s.service && svc(s.service);
+    const ok = this.canNext();
+    const paidLabel = a => priceOf(a) === 0 ? '10º corte · grátis' : a.paid >= priceOf(a) ? 'Pago na app' : `Pagas ${eur(priceOf(a))} na barbearia`;
+    const q = sv && s.date !== null ? this.quote(s.service, s.date) : sv ? { base: sv.price, price: sv.price, disc: this.freeAvail() ? 'free' : null } : null;
+    const finalPrice = q ? (q.disc === 'free' ? 0 : q.price) : 0;
+    const isFree = !!q && q.disc === 'free' && !s.editingId;
+    const titles = ['', 'Serviço', 'Barbeiro', 'Dia e hora', s.editingId ? 'Confirmar' : 'Pagamento'];
+    const payNow = finalPrice;
+    const statusOf = a => a.status === 'done' ? ['Concluído', '#1c1d1f', MUTED, LINE] : a.status === 'noshow' ? ['Faltou', 'transparent', RED, RED] : priceOf(a) === 0 ? ['Grátis', Y, '#000', Y] : a.paid >= priceOf(a) ? ['Pago', Y, '#000', Y] : ['Por pagar', 'transparent', Y, Y];
+    const myBid = s.barberId || BARBERS[0].id;
+    const bList = s.appts.filter(a => a.date === s.bDay && a.status !== 'cancelled' && (a.barber || BARBERS[0].id) === myBid).sort((a, b) => a.time.localeCompare(b.time));
+    const det = s.appts.find(a => a.id === s.detailId);
+    const setStatus = (id, status) => this.setState(st => {
+      const prev = st.appts.find(a => a.id === id);
+      const dv = prev && prev.mine ? (status === 'done' ? 1 : 0) - (prev.status === 'done' ? 1 : 0) : 0;
+      if (prev) this.statusPost(prev, { done: 'concluida', noshow: 'faltou', booked: 'marcada', cancelled: 'cancelada' }[status]);
+      return { appts: st.appts.map(a => a.id === id ? { ...a, status } : a), visits: st.visits + dv };
+    });
+    const nameOf = a => a.mine ? `${me} (tu)` : a.client;
+    const freeN = s.date === null ? 0 : TIMES.filter((_, ti) => !this.isTaken(s.date, ti)).length;
+    const seg = on => ({ bg: on ? Y : 'transparent', fg: on ? '#000' : TXT, border: on ? Y : '#3a3c40' });
+    const sc = seg(client), sb = seg(!client);
+    const ctry = COUNTRIES.find(c => c.code === s.country);
+    const digits = s.phone.replace(/\D/g, '');
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(s.email.trim());
+    const detailsInvalid = !s.name.trim() || digits.length !== ctry.len || !emailOk || !s.birth || (!s.provider && s.password.length < 6);
+    const upMine = mine.length;
+    const cyc = s.visits % 10;
+    const [bm, bd] = s.birth ? s.birth.split('-').slice(1).map(Number) : [0, 0];
+    const bdayIdx = s.birth ? DATES.findIndex((_, i) => this.isBday(i)) : -1;
+    const remind = nx && nx.date >= 1 ? nx : null;
+    const left = ctry.len - digits.length;
+    const calBase = new Date(TODAY.getFullYear(), TODAY.getMonth() + s.calOff, 1);
+    const lastDay = DATES[NDAYS - 1];
+    const maxOff = (lastDay.getFullYear() - TODAY.getFullYear()) * 12 + lastDay.getMonth() - TODAY.getMonth();
+    const lead = calBase.getDay(), dim = new Date(calBase.getFullYear(), calBase.getMonth() + 1, 0).getDate();
+    const calCells = Array.from({ length: Math.ceil((lead + dim) / 7) * 7 }, (_, k) => {
+      const dayNum = k - lead + 1;
+      if (dayNum < 1 || dayNum > dim) return { day: '', vis: 'hidden', disabled: true, border: 'transparent', bg: 'transparent', fg: TXT, dot: 'transparent' };
+      const di = idxOfIso(isoOf(new Date(calBase.getFullYear(), calBase.getMonth(), dayNum)));
+      const out = di < 0 || di >= NDAYS, c = !out && closed(di), dis = out || c, on = s.date === di;
+      return { day: dayNum, vis: 'visible', disabled: dis,
+        bg: on ? Y : dis ? 'transparent' : '#1a1b1e', fg: on ? '#000' : dis ? '#45474b' : TXT, border: on ? Y : 'transparent',
+        dot: this.isBday(di) ? (on ? '#000' : Y) : 'transparent',
+        onPick: () => this.setState({ date: di, time: null }) };
+    });
+    const mob = s.isMobile;
+    const framed = !mob && s.framed, desk = !mob && !s.framed;
+    const curB = BARBERS.find(b => b.id === s.barberId) || (s.barberAuth ? BARBERS[0] : null);
+    const doLogin = () => {
+      const id = s.bUser.trim().toLowerCase(), idDigits = id.replace(/\D/g, '');
+      const brb = BARBERS.find(b => b.id === id);
+      if (brb && s.bPass === ((s.barberPw || {})[brb.id] || brb.pass)) { this.setState({ mode: 'barber', barberAuth: true, barberId: brb.id, onb: null, bUser: '', bPass: '', bErr: false, bDay: 0 }); return this.sync(); }
+      const phoneDigits = s.phone.replace(/\D/g, '');
+      const match = s.password && s.bPass === s.password && (id === s.email.trim().toLowerCase() || (idDigits.length >= 7 && phoneDigits && (idDigits === phoneDigits || idDigits.endsWith(phoneDigits))));
+      if (match) return this.setState({ mode: 'client', onb: null, view: 'home', bUser: '', bPass: '', bErr: false });
+      if (id === '2222' && s.bPass === '2222') return this.setState({ mode: 'client', onb: null, view: 'home', bUser: '', bPass: '', bErr: false, name: s.name || 'Cliente Teste', email: s.email || 'teste@twentytwo.pt' });
+      this.setState({ bErr: true });
+    };
+    return {
+      isMobile: mob, isDesk: desk, showPanel: framed, showFakeStatus: framed,
+      outerDir: desk ? 'column' : 'row', outerGap: desk ? '0' : '40px 64px', stripeDisp: desk ? 'none' : 'block',
+      outerPad: framed ? '40px 24px' : '0',
+      frameW: framed ? '390px' : desk ? 'min(100%, 760px)' : '100%', frameH: framed ? '844px' : desk ? 'calc(100dvh - 68px)' : '100dvh',
+      frameR: framed ? '54px' : '0', frameB: framed ? '11px solid #1c1d1f' : 'none',
+      frameShadow: framed ? '0 40px 90px rgba(0,0,0,.6),0 0 0 1px #2c2d30' : desk ? '-1px 0 0 #1c1d1f, 1px 0 0 #1c1d1f' : 'none',
+      notifTop: mob ? 'max(env(safe-area-inset-top), 10px)' : desk ? '14px' : '52px',
+      toggleFramed: () => this.setState({ framed: !s.framed }),
+      deskHome: () => { if (client && !s.onb) this.setState({ view: 'home' }); },
+      deskBook: () => this.open(),
+      showBottomTabs: client && !s.onb && ['home', 'bookings', 'profile'].includes(s.view) && !desk,
+      todayLabel: `${cap(DOWL[TODAY.getDay()])}, ${TODAY.getDate()} de ${MONL[TODAY.getMonth()]}`, todayISO: isoOf(TODAY),
+      calTitle: `${cap(MONL[calBase.getMonth()])} ${calBase.getFullYear()}`,
+      calPrev: () => this.setState({ calOff: Math.max(0, s.calOff - 1) }), calNext: () => this.setState({ calOff: Math.min(maxOff, s.calOff + 1) }),
+      calPrevDis: s.calOff === 0, calNextDis: s.calOff >= maxOff, calPrevOp: s.calOff === 0 ? 0.35 : 1, calNextOp: s.calOff >= maxOff ? 0.35 : 1,
+      isProfile: client && !s.onb && s.view === 'profile',
+      initial: me[0].toUpperCase(), fullName: me,
+      profileRows: [
+        { k: 'Telemóvel', v: this.phoneFull() }, { k: 'Email', v: s.email || '—' },
+        { k: 'Aniversário', v: s.birth ? `${bd} de ${MONL[bm - 1]}` : '—' }, { k: 'Avisos', v: 'Notificação na app e email' },
+        { k: 'Cortes concluídos', v: `${s.visits}` },
+      ],
+      editProfile: () => this.setState({ onb: 'details' }),
+      permLabel: s.perm === 'granted' ? 'Ativas' : s.perm === 'denied' ? 'Bloqueadas' : 'Desligadas', permColor: s.perm === 'granted' ? Y : MUTED,
+      permBtn: s.perm === 'granted' ? 'Ativas ✓' : 'Ativar',
+      askPerm: () => { if (!('Notification' in window)) return this.notify({ title: 'Indisponível', body: 'Instala a app no ecrã principal para receber notificações.' }); Notification.requestPermission().then(p => this.setState({ perm: p })); },
+      testNotif: () => this.notify({ title: 'Twenty Two', body: 'As notificações estão a funcionar.' }),
+      showInstallTip: !s.standalone,
+      exitBarber: () => this.setState({ mode: 'client', barberAuth: false, barberId: null, bSheet: null, onb: 'welcome', bUser: '', bPass: '', detailId: null }),
+      bName: curB ? curB.name : '', bUserId: curB ? curB.id : '', bInitial: curB ? curB.name[0] : '',
+      openBMenu: () => this.openBProfile(), closeBSheet: () => this.setState({ bSheet: null }),
+      showBSheet: !client && s.barberAuth && !!s.bSheet, bMenu: s.bSheet === 'menu', bPwForm: s.bSheet === 'pw',
+      openPw: () => this.setState({ bSheet: 'pw', pwCur: '', pwNew: '', pwNew2: '', pwErr: '' }), cancelPw: () => this.setState({ bSheet: null, pwErr: '' }),
+      pwCur: s.pwCur, pwNew: s.pwNew, pwNew2: s.pwNew2, pwErr: s.pwErr, hasPwErr: !!s.pwErr, pwOk: s.pwOk,
+      onPwCur: e => this.setState({ pwCur: e.target.value, pwErr: '' }), onPwNew: e => this.setState({ pwNew: e.target.value, pwErr: '' }), onPwNew2: e => this.setState({ pwNew2: e.target.value, pwErr: '' }),
+      savePw: () => {
+        if (!curB) return;
+        const current = (s.barberPw || {})[curB.id] || curB.pass;
+        if (s.pwCur !== current) return this.setState({ pwErr: 'A palavra-passe atual está errada.' });
+        if (s.pwNew.length < 6) return this.setState({ pwErr: 'A nova palavra-passe precisa de pelo menos 6 caracteres.' });
+        if (s.pwNew !== s.pwNew2) return this.setState({ pwErr: 'As palavras-passe novas não coincidem.' });
+        if (s.pwNew === current) return this.setState({ pwErr: 'Escolhe uma palavra-passe diferente da atual.' });
+        this.setState({ barberPw: { ...(s.barberPw || {}), [curB.id]: s.pwNew }, bSheet: null, pwOk: true, pwCur: '', pwNew: '', pwNew2: '' });
+      },
+      logout: () => this.setState({ onb: 'welcome', view: 'home', mode: 'client', barberAuth: false, cancelId: null, detailId: null, bUser: '', bPass: '' }),
+      segClientBg: sc.bg, segClientFg: sc.fg, segClientBorder: sc.border, segBarberBg: sb.bg, segBarberFg: sb.fg, segBarberBorder: sb.border,
+      toClient: () => { if (location.hash === '#barbeiro') history.replaceState(null, '', location.pathname + location.search); this.setState({ mode: 'client', detailId: null }); },
+      toBarber: () => this.setState({ mode: 'barber', cancelId: null, bDay: s.date ?? s.bDay }),
+      restart: () => { try { localStorage.removeItem(KEY); } catch (e) {} this._saved = null; this.setState({ mode: 'client', onb: 'welcome', name: '', phone: '', country: 'PT', email: '', birth: '', visits: 0, notif: null, notifOn: false, emails: [], sms: [], channel: 'whatsapp', view: 'home', appts: SEED, cancelId: null, detailId: null }); },
+      isWelcome: s.onb === 'welcome', isDetails: s.onb === 'details', isSocial: s.onb === 'social',
+      socialInitial: (s.name.trim() || '?')[0].toUpperCase(),
+      socialInvalid: digits.length !== ctry.len || !s.birth, socialBtnBg: digits.length !== ctry.len || !s.birth ? '#1c1d1f' : Y, socialBtnFg: digits.length !== ctry.len || !s.birth ? '#55575b' : '#000',
+      goLogin: () => this.setState({ onb: 'login', bErr: false, bPass: '' }),
+      password: s.password, onPassword: e => this.setState({ password: e.target.value }),
+      socialGoogle: () => this.socialLogin('google'), socialApple: () => this.socialLogin('apple'),
+      hasProvider: !!s.provider, needsPassword: !s.provider, providerDemo: !!s.provider && !!s.providerDemo,
+      providerLabel: s.provider === 'apple' ? 'Apple' : 'Google',
+      clearProvider: () => this.setState({ provider: null, providerDemo: false }),
+      goDetails: () => this.setState({ onb: 'details', mode: 'client' }), goWelcome: () => this.setState({ onb: 'welcome' }),
+      skipOnb: () => this.setState({ onb: null, name: s.name || 'Sam', email: s.email || 'sam@email.pt', birth: s.birth || '1996-11-07' }),
+      email: s.email, onEmail: e => this.setState({ email: e.target.value }), emailBorder: s.email && !emailOk ? RED : LINE,
+      birth: s.birth, onBirth: e => this.setState({ birth: e.target.value }),
+      loyaltyCount: `${cyc}/10`,
+      stamps: Array.from({ length: 10 }, (_, k) => {
+        const n = k + 1, done = n <= cyc, last = n === 10;
+        return { label: done ? '✓' : last ? 'Grátis' : n,
+          bg: done ? Y : 'transparent', fg: done ? '#000' : last ? Y : '#55575b',
+          border: done || last ? Y : '#3a3c40', borderStyle: last && cyc === 9 ? 'dashed' : 'solid' };
+      }),
+      loyaltyMsg: (() => { if (this.freeBooked()) return 'O teu corte grátis já está marcado.'; if (this.freeAvail()) return 'Desbloqueaste um corte grátis. É aplicado na próxima marcação.'; const left = 9 - cyc; return `Faltam ${left} ${left === 1 ? 'corte concluído' : 'cortes concluídos'} para desbloqueares o 10º grátis.`; })(),
+      loyaltyNote: 'Cada corte só conta quando o barbeiro o marca como concluído.',
+      loyaltyMsgColor: this.freeAvail() || this.freeBooked() ? Y : MUTED,
+      hasBirth: !!s.birth,
+      bdayTitle: s.birth ? (bdayIdx === 0 ? 'Parabéns! Hoje tens 10%' : `Aniversário a ${bd} de ${MONL[bm - 1]}`) : '',
+      bdaySub: bdayIdx >= 0 ? '10% em qualquer serviço marcado para esse dia.' : 'Nesse dia tens 10% em qualquer serviço.',
+      bdayBookable: bdayIdx >= 0 && !closed(bdayIdx), bookBday: () => this.open({ date: bdayIdx }),
+      notif: s.notif || {}, notifY: s.notifOn ? '0' : '-160%', notifOp: s.notifOn ? 1 : 0, hideNotif: () => this.setState({ notifOn: false }),
+      noReminder: !remind, simOp: remind ? 1 : 0.4,
+      simBarber: () => this.setState({ bSimAt: Date.now(), bCal: false, bProf: false, bSheet: null }),
+      simReminder: () => remind && this.notify({ title: `Amanhã às ${remind.time}`, body: `${svc(remind.service).name} na Twenty Two. Precisas de mudar? Remarca na app.` }, this.emailFor(remind, 'reminder')),
+      hasEmail: s.emails.length > 0, lastEmail: s.emails[0] || { rows: [] },
+      emailCancel: () => { const id = (s.emails[0] || {}).apptId; const a = s.appts.find(x => x.id === id && x.status === 'booked'); if (a) this.setState({ mode: 'client', cancelId: a.id }); },
+      emailIcs: () => { const id = (s.emails[0] || {}).apptId; const a = s.appts.find(x => x.id === id); if (a) this.downloadIcs(a); },
+      name: s.name, phone: s.phone, onName: e => this.setState({ name: e.target.value }), onPhone: e => this.setState({ phone: fmtPhone(e.target.value.replace(/\D/g, '').slice(0, ctry.len), ctry.groups) }),
+      country: s.country, countries: COUNTRIES.map(c => ({ code: c.code, label: `${flag(c.code)} ${c.name} ${c.dial}` })),
+      countryShort: `${flag(ctry.code)} ${ctry.dial}`,
+      onCountry: e => { const c = COUNTRIES.find(x => x.code === e.target.value); this.setState({ country: c.code, phone: fmtPhone(digits.slice(0, c.len), c.groups) }); },
+      phonePh: ctry.ph,
+      phoneHint: left === 0 ? `${ctry.dial} ${s.phone} ✓` : `${ctry.len} dígitos${digits.length ? ` · faltam ${left}` : ''}`,
+      phoneHintColor: left === 0 ? Y : MUTED,
+      detailsInvalid, detailsBtnBg: detailsInvalid ? '#1c1d1f' : Y, detailsBtnFg: detailsInvalid ? '#55575b' : '#000',
+      finishOnb: () => { this.setState({ onb: null }); if ('Notification' in window && Notification.permission === 'default') Notification.requestPermission().then(p => this.setState({ perm: p })).catch(() => {}); },
+      isHome: client && !s.onb && s.view === 'home', isBookings: client && !s.onb && s.view === 'bookings',
+      isFlow: client && !s.onb && s.view === 'flow', isDone: client && !s.onb && s.view === 'done', isBarber: !client && s.barberAuth && !s.onb, isLogin: s.onb === 'login',
+      bUser: s.bUser, bPass: s.bPass, bErr: s.bErr, bErrBorder: s.bErr ? RED : LINE,
+      onBUser: e => this.setState({ bUser: e.target.value, bErr: false }), onBPass: e => this.setState({ bPass: e.target.value, bErr: false }),
+      barberLogin: doLogin, onBKey: e => { if (e.key === 'Enter') doLogin(); },
+      showTabs: client && !s.onb && ['home', 'bookings', 'profile'].includes(s.view),
+      tabs: [['Início', 'home'], ['Marcações', 'bookings'], ['Perfil', 'profile']].map(([label, v]) => ({
+        label, color: s.view === v ? TXT : '#6a6c70', line: s.view === v ? Y : '#2a2b2e', deskBg: s.view === v ? '#1a1b1e' : 'transparent',
+        onClick: () => v === 'flow' ? this.open() : this.setState({ view: v }) })),
+      firstName: me.split(' ')[0],
+      goHome: () => this.setState({ view: 'home' }), goBookings: () => this.setState({ view: 'bookings' }),
+      startBooking: () => this.open(),
+      exitFlow: () => this.setState({ view: s.editingId ? 'bookings' : 'home' }),
+      back: () => s.step > 1 ? this.setState({ step: s.step - 1 }) : this.setState({ view: s.editingId ? 'bookings' : 'home' }),
+      hasNext: !!nx,
+      nextAppt: nx ? { dateLong: fmt(nx.date), time: nx.time, service: `${svc(nx.service).name} · ${bName(nx.barber)}`, countdown: nx.date === 0 ? 'Hoje' : nx.date === 1 ? 'Amanhã' : `Daqui a ${nx.date} dias` } : {},
+      services: SERVICES.map(x => {
+        const on = s.service === x.id;
+        return { ...x, border: on ? Y : LINE, bg: on ? '#1a1c10' : '#151619',
+          onPick: () => this.setState({ service: x.id }), onQuick: () => this.open({ service: x.id, step: 2 }) };
+      }),
+      progress: [1, 2, 3, 4].map(n => ({ n, bg: n < s.step ? Y : 'transparent', fg: n < s.step ? '#000' : n === s.step ? Y : '#55575b', border: n <= s.step ? Y : '#3a3c40' })),
+      stepN: s.step, step1: s.step === 1, step2: s.step === 2, step3: s.step === 3, step4: s.step === 4, stepTitle: titles[s.step],
+      barberOpts: BARBERS.map((b, bi) => {
+        const on = s.barber === b.id;
+        let nd = -1, nt = -1;
+        for (let di = 0; di < 14 && nd < 0; di++) { if (closed(di)) continue; const ti = TIMES.findIndex((_, t) => !this.isTaken(di, t, b.id)); if (ti >= 0) { nd = di; nt = ti; } }
+        return { name: b.name, initial: b.name[0], border: on ? Y : LINE, bg: on ? '#1a1c10' : '#151619', ring: on ? Y : '#3a3c40', dot: on ? Y : 'transparent',
+          next: nd < 0 ? 'Sem vagas nas próximas 2 semanas' : `Próxima vaga: ${nd === 0 ? 'hoje' : nd === 1 ? 'amanhã' : fmt(nd)} às ${TIMES[nt]}`,
+          onPick: () => this.setState({ barber: b.id, time: null }) };
+      }),
+      dowHead: DOW, calCells,
+      noDate: s.date === null,
+      timesHeader: s.date === null ? 'Hora' : fmtLong(s.date), freeCount: s.date === null ? '' : `${freeN} livres`,
+      times: s.date === null ? [] : TIMES.map((t, ti) => {
+        const off = this.isTaken(s.date, ti), on = s.time === t;
+        return { t, off, deco: off ? 'line-through' : 'none',
+          bg: on ? Y : off ? 'transparent' : '#1a1b1e', fg: on ? '#000' : off ? '#45474b' : TXT,
+          border: on ? Y : off ? '#1c1d1f' : 'transparent', onPick: () => this.setState({ time: t }) };
+      }),
+      reviewRows: s.step === 4 && sv ? [
+        { k: 'Serviço', v: `${sv.name} · ${sv.dur} min`, onEdit: () => this.setState({ step: 1 }) },
+        { k: 'Barbeiro', v: bName(s.barber), onEdit: () => this.setState({ step: 2 }) },
+        { k: 'Quando', v: `${fmt(s.date)}, ${s.time}`, onEdit: () => this.setState({ step: 3 }) },
+      ] : [],
+      totalLabel: eur(finalPrice),
+      discounts: q && q.disc === 'free' ? [{ k: '10º corte grátis', v: `-${eur(q.base)}` }] : q && q.disc === 'bday' ? [{ k: 'Aniversário -10%', v: `-${eur(Math.round((q.base - q.price) * 100) / 100)}` }] : [],
+      showPayOptions: !s.editingId && !isFree, payingNow: s.payType === 'full',      payPolicy: s.payType === 'full' ? 'Cancela ou remarca até 24 h antes e devolvemos o valor total.' : 'Cancela ou remarca grátis até 24 h antes.', isResched: !!s.editingId, isFreeNew: isFree,
+      payTypes: sv ? [
+        { label: 'Pagar na barbearia', sub: 'No dia, em dinheiro ou cartão', amount: eur(finalPrice), k: 'shop' },
+        { label: 'Pagar já na app', sub: 'MB WAY, Apple Pay ou cartão', amount: eur(finalPrice), k: 'full' },
+      ].map(o => ({ ...o, border: s.payType === o.k ? Y : LINE, dot: s.payType === o.k ? Y : 'transparent', onPick: () => this.setState({ payType: o.k }) })) : [],
+      methods: [['mbway', 'MB WAY'], ['apple', 'Apple Pay'], ['card', 'Cartão']].map(([k, label]) => {
+        const on = s.method === k; return { label, bg: on ? '#1a1c10' : CARD, fg: on ? Y : TXT, border: on ? Y : LINE, onPick: () => this.setState({ method: k }) };
+      }),
+      footTitle: sv ? `${sv.name} · ${eur(finalPrice)}` : 'Escolhe o serviço',
+      footSub: [s.barber && bName(s.barber), s.date !== null && fmt(s.date), s.time].filter(Boolean).join(', ') || `${SERVICES.length} serviços`,
+      nextLabel: s.step < 4 ? 'Continuar' : s.editingId ? 'Confirmar' : s.paying ? 'A processar…' : isFree || s.payType === 'shop' ? 'Confirmar' : `Pagar ${eur(payNow)}`,
+      nextDisabled: !ok, nextBg: ok ? Y : '#1c1d1f', nextFg: ok ? '#000' : '#55575b',
+      onNext: () => { if (!ok) return; s.step === 4 ? this.confirm() : this.setState({ step: s.step + 1 }); },
+      doneTitle: s.lastDone?.resched ? 'Remarcado' : 'Está marcado',
+      receipt: s.lastDone ? [
+        { k: 'Serviço', v: svc(s.lastDone.service).name },
+        { k: 'Barbeiro', v: bName(s.lastDone.barber) },
+        { k: 'Quando', v: `${fmt(s.lastDone.date)}, ${s.lastDone.time}` },
+        { k: 'Pago', v: eur(s.lastDone.paid) },
+        { k: 'A pagar no dia', v: eur(Math.max(Math.round((priceOf(s.lastDone) - s.lastDone.paid) * 100) / 100, 0)) },
+      ] : [],
+      doneNotifs: s.lastDone ? [
+        { k: 'Agora', v: `Notificação na app e email para ${s.email || 'sam@email.pt'}`, dot: Y },
+        s.lastDone.date >= 1 ? { k: `${fmt(s.lastDone.date - 1)}, ${s.lastDone.time}`, v: 'Lembrete 24 h antes, por notificação na app e email', dot: '#3a3c40' } : { k: 'Hoje', v: 'Faltam menos de 24 h, por isso não há lembrete', dot: '#3a3c40' },
+      ] : [],
+      calLabel: s.cal ? 'Adicionado ao calendário ✓' : 'Adicionar ao calendário', toggleCal: () => { if (s.lastDone) this.downloadIcs(s.lastDone); this.setState({ cal: true }); },
+      noUpcoming: mine.length === 0,
+      upcoming: mine.map(a => ({
+        mon: MON[DATES[a.date].getMonth()], day: DATES[a.date].getDate(), dow: cap(DOWL[DATES[a.date].getDay()]), time: a.time,
+        service: svc(a.service).name, barber: bName(a.barber), paidLabel: paidLabel(a),
+        onCancel: () => this.setState({ cancelId: a.id }),
+        onReschedule: () => this.open({ service: a.service, barber: a.barber || BARBERS[0].id, step: 3, editingId: a.id, date: a.date }),
+      })),
+      past: s.past.map(p => ({ service: svc(p.service).name, date: `${p.label}${p.barber ? ' · ' + bName(p.barber) : ''}`, onAgain: () => this.open({ service: p.service, barber: p.barber || null, step: p.barber ? 3 : 2 }) })),
+      showCancel: client && !!s.cancelId,
+      cancelBody: (() => { const a = s.appts.find(x => x.id === s.cancelId); if (!a) return ''; const base = `${svc(a.service).name}, ${fmt(a.date)} às ${a.time}.`; if (!a.paid) return `${base} A hora fica livre para outro cliente.`; return a.date === 0 ? `${base} Faltam menos de 24 h, por isso os ${eur(a.paid)} pagos não são devolvidos.` : `${base} Os ${eur(a.paid)} que pagaste são devolvidos em 3 a 5 dias.`; })(),
+      closeCancel: () => this.setState({ cancelId: null }),
+      doCancel: () => { const ca = s.appts.find(x => x.id === s.cancelId); setStatus(s.cancelId, 'cancelled'); this.setState({ cancelId: null }); if (ca && ca.mine) this.post('cancel', ca); },
+      bDayLong: s.bProf ? 'Perfil' : s.bCal ? 'Calendário' : s.bDay === 0 ? 'Hoje' : fmtLong(s.bDay), bOpenLabel: closed(s.bDay) ? 'Fechado' : '10:00–19:00',
+      bCalView: !!s.bCal && !s.bProf, bDayView: !s.bCal && !s.bProf, bProfView: !!s.bProf, bTopBar: !s.bProf,
+      ...(() => {
+        const p = s.bRepP || 'week', off = s.bRepOff || 0;
+        const r = this.repRange(p, off), d = s.bRep, ok = !!d && s.bRepKey === `${myBid}|${p}|${off}`;
+        const c = ok ? d.cur : {}, pv = ok ? d.prev : {};
+        const delta = (a, b) => { if (!ok || !b) return { t: ok && a ? 'novo' : '—', col: MUTED }; const v = Math.round((a - b) / b * 100); return { t: `${v > 0 ? '+' : ''}${v}% vs anterior`, col: v > 0 ? '#7bd88f' : v < 0 ? RED : MUTED }; };
+        const ticket = ok && c.feitos ? c.fat / c.feitos : 0, pticket = ok && pv.feitos ? pv.fat / pv.feitos : 0;
+        const occ = ok && r.open ? Math.min(Math.round(c.horas / (r.open * 9) * 100), 100) : 0;
+        const taxa = ok && (c.feitos + c.faltas) ? Math.round(c.faltas / (c.feitos + c.faltas) * 100) : 0;
+        const kpi = (k, v, dl) => ({ k, v, dt: dl.t, dcol: dl.col });
+        const bk = ok ? d.buckets : r.buckets.map(() => ({ cortes: 0, fat: 0 }));
+        const max = Math.max(1, ...bk.map(x => x.fat));
+        return {
+          bRepChips: [['Semana', 'week'], ['Mês', 'month'], ['Trimestre', 'quarter'], ['Semestre', 'half'], ['Ano', 'year']].map(([label, v]) => ({ label, bg: p === v ? Y : '#111214', fg: p === v ? '#000' : TXT, border: p === v ? Y : LINE, onPick: () => this.loadReport(v, 0) })),
+          bRepLabel: r.label, bRepPrev: () => this.loadReport(p, off - 1), bRepNext: () => off < 0 && this.loadReport(p, off + 1), bRepNextOp: off < 0 ? 1 : 0.3,
+          bRepLoading: !!s.bRepLoading, bRepDemo: ok && !!s.bRepDemo, bRepSub: off === 0 ? 'Período atual, até hoje' : 'Período fechado',
+          bKpis: [
+            kpi('Faturação', eur(ok ? c.fat : 0), delta(c.fat, pv.fat)),
+            kpi('Cortes feitos', `${ok ? c.feitos : 0}`, delta(c.feitos, pv.feitos)),
+            kpi('Ticket médio', eur(Math.round(ticket * 100) / 100), delta(ticket, pticket)),
+            kpi('Clientes', `${ok ? c.clientes : 0}`, { t: `${ok ? c.novos : 0} novos`, col: MUTED }),
+            kpi('Ocupação', `${occ}%`, { t: `${ok ? c.horas : 0} h de ${r.open * 9} h`, col: MUTED }),
+            kpi('Faltas', `${ok ? c.faltas : 0}`, { t: `${taxa}% · ${ok ? c.canceladas : 0} cancelamentos`, col: taxa >= 10 ? RED : MUTED }),
+          ],
+          bBars: bk.map((x, i) => ({ label: r.buckets[i][2], h: `${Math.max(Math.round(x.fat / max * 100), x.fat ? 4 : 2)}%`, v: x.fat ? `${Math.round(x.fat)}€` : '', n: x.cortes ? `${x.cortes}` : '', bg: x.fat === max && x.fat ? Y : '#3a3c1a' })),
+          bHigh: [{ k: 'Serviço mais pedido', v: ok && c.topServico ? c.topServico : '—' }, { k: 'Dia mais forte', v: ok && c.topDia ? cap(c.topDia) : '—' }, { k: 'Período anterior', v: ok ? `${eur(pv.fat || 0)} · ${pv.feitos || 0} cortes` : '—' }],
+          openPwB: () => this.setState({ bSheet: 'pw', pwCur: '', pwNew: '', pwNew2: '', pwErr: '', pwOk: false }),
+        };
+      })(),
+      showBarberTabs: !client && s.barberAuth && !s.onb,
+      ...(() => {
+        const none = { bHasNext: false, bNext: { time: '', day: '', when: '', client: '', service: '', dur: '', onOpen: () => {} } };
+        if (s.bCal || s.bProf) return none;
+        const sim = s.bSimAt && Date.now() - s.bSimAt < 60000;
+        const cd = sec => { sec = Math.max(sec, 0); return `daqui a ${Math.floor(sec / 60)}:${String(sec % 60).padStart(2, '0')}`; };
+        const nx = this.nextFor(myBid);
+        const left = nx ? Math.floor((this.startOf(nx) - Date.now()) / 1000) : Infinity;
+        if (nx && (left <= 15 * 60 || sim)) {
+          const when = left <= 24 * 3600 && nx.date === 0 ? cd(left) : nx.date === 1 ? 'amanhã' : fmt(nx.date);
+          return { bHasNext: true, bNext: { time: nx.time, day: nx.date === 0 ? 'Hoje' : nx.date === 1 ? 'Amanhã' : `${DATES[nx.date].getDate()} ${MON[DATES[nx.date].getMonth()]}`, when, client: nameOf(nx), service: svc(nx.service).name, dur: svc(nx.service).dur,
+            onOpen: () => this.setState({ bDay: nx.date, detailId: nx.id }) } };
+        }
+        if (sim) {
+          const st = s.bSimAt + 15 * 60000, t = new Date(st);
+          return { bHasNext: true, bNext: { time: `${String(t.getHours()).padStart(2, '0')}:${String(t.getMinutes()).padStart(2, '0')}`, day: 'Exemplo', when: cd(Math.floor((st - Date.now()) / 1000)), client: 'Rui Costa', service: SERVICES[0].name, dur: SERVICES[0].dur, onOpen: () => {} } };
+        }
+        return none;
+      })(),
+      bTabs: [['Início', 'day'], ['Calendário', 'cal'], ['Perfil', 'menu']].map(([label, v]) => {
+        const on = v === 'menu' ? !!s.bProf : !s.bProf && (v === 'cal') === !!s.bCal;
+        return { label, color: on ? TXT : '#6a6c70', line: on ? Y : '#2a2b2e',
+          onClick: () => v === 'menu' ? this.openBProfile() : v === 'day' ? this.setState({ bCal: false, bProf: false, bSheet: null, bDay: !s.bCal && !s.bProf ? 0 : s.bDay }) : this.setState({ bCal: true, bProf: false, bSheet: null }) };
+      }),
+      ...(() => {
+        const last = DATES[NDAYS - 1];
+        const maxOff = (last.getFullYear() - TODAY.getFullYear()) * 12 + last.getMonth() - TODAY.getMonth();
+        const off = Math.min(Math.max(s.bMonth || 0, 0), maxOff);
+        const first = new Date(TODAY.getFullYear(), TODAY.getMonth() + off, 1);
+        const nd = new Date(first.getFullYear(), first.getMonth() + 1, 0).getDate();
+        const lead = (first.getDay() + 6) % 7;
+        const t0 = new Date(TODAY.getFullYear(), TODAY.getMonth(), TODAY.getDate()).getTime();
+        const cells = []; let total = 0;
+        for (let k = 0; k < lead; k++) cells.push({ day: '', count: '', vis: 'hidden', off: true, bg: 'transparent', fg: TXT, border: 'transparent', op: 0, pillBg: 'transparent', pillFg: TXT, onPick: () => {} });
+        for (let d = 1; d <= nd; d++) {
+          const i = Math.round((new Date(first.getFullYear(), first.getMonth(), d).getTime() - t0) / 864e5);
+          const inR = i >= 0 && i < NDAYS, shut = inR && closed(i);
+          const n = inR ? s.appts.filter(a => a.date === i && a.status !== 'cancelled' && (a.barber || BARBERS[0].id) === myBid).length : 0;
+          total += n;
+          const today = i === 0;
+          cells.push({ day: d, count: !inR ? '' : shut ? '—' : n ? `${n}` : '·', vis: 'visible', off: !inR,
+            bg: n ? '#1a1c10' : '#111214', fg: TXT, border: today ? Y : n ? '#4a4d1c' : LINE, op: !inR ? 0.25 : shut ? 0.4 : 1,
+            pillBg: n ? Y : 'transparent', pillFg: n ? '#000' : MUTED,
+            onPick: () => { if (inR) this.setState({ bDay: i, bCal: false }); } });
+        }
+        return { bMonthLabel: `${MONL[first.getMonth()]} ${first.getFullYear()}`, bMonthTotal: total === 1 ? '1 corte marcado' : `${total} cortes marcados`,
+          bWeekdays: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'], bCells: cells,
+          bNoPrev: off <= 0, bNoNext: off >= maxOff, bPrevOp: off <= 0 ? 0.3 : 1, bNextOp: off >= maxOff ? 0.3 : 1,
+          bPrevMonth: () => this.setState({ bMonth: Math.max(off - 1, 0) }), bNextMonth: () => this.setState({ bMonth: Math.min(off + 1, maxOff) }) };
+      })(),
+      bDates: DATES.slice(0, 14).map((d, i) => {
+        const n = s.appts.filter(a => a.date === i && a.status !== 'cancelled' && (a.barber || BARBERS[0].id) === myBid).length, on = s.bDay === i;
+        return { dow: DOW[d.getDay()], day: d.getDate(), count: closed(i) ? '—' : n ? `${n}` : '·', op: closed(i) ? 0.4 : 1,
+          bg: on ? Y : '#111214', fg: on ? '#000' : TXT, border: on ? Y : LINE, onPick: () => this.setState({ bDay: i }) };
+      }),
+      bStats: (() => {
+        const total = bList.filter(a => a.status !== 'noshow').reduce((t, a) => t + priceOf(a), 0);
+        const paid = bList.reduce((t, a) => t + a.paid, 0);
+        return [{ k: 'marcações', v: `${bList.length}`, color: TXT }, { k: 'previsto', v: eur(total), color: Y }, { k: 'já pago', v: eur(paid), color: TXT }];
+      })(),
+      bEmpty: bList.length === 0, bEmptyText: closed(s.bDay) ? 'Fechado neste dia.' : 'Ainda sem marcações.',
+      bAppts: bList.map(a => {
+        const [status, tagBg, tagFg, tagBorder] = statusOf(a);
+        return { time: a.time, client: nameOf(a), service: svc(a.service).name, dur: svc(a.service).dur, status, tagBg, tagFg, tagBorder,
+          op: a.status === 'done' || a.status === 'noshow' ? 0.5 : 1, onOpen: () => this.setState({ detailId: a.id }) };
+      }),
+      showDetail: !client && !!det,
+      closeDetail: () => this.setState({ detailId: null }), stop: e => e.stopPropagation(),
+      det: det ? (() => {
+        const [status, tagBg, tagFg, tagBorder] = statusOf(det); const p = priceOf(det);
+        return { client: nameOf(det), when: `${fmt(det.date)} · ${det.time}`, status, tagBg, tagFg, tagBorder,
+          rows: [
+            { k: 'Serviço', v: `${svc(det.service).name} · ${svc(det.service).dur} min` },
+            { k: 'Preço', v: det.disc === 'free' ? '10º corte · grátis' : det.disc === 'bday' ? `${eur(p)} (aniversário -10%)` : eur(p) },
+            { k: 'Pago na app', v: eur(det.paid) },
+            { k: 'A cobrar', v: det.status === 'noshow' ? '—' : eur(Math.max(Math.round((p - det.paid) * 100) / 100, 0)) },
+            { k: 'Nota', v: det.note || '—' },
+            ...(det.mine ? [{ k: 'Cartão de cliente', v: det.status === 'done' ? `${s.visits % 10 || 10}/10` : `${s.visits % 10}/10 · conta ao concluir` }] : []),
+          ],
+          actionable: det.status === 'booked', reopenable: det.status !== 'booked',
+          onDone: () => { setStatus(det.id, 'done'); this.setState({ detailId: null }); },
+          onNoShow: () => { setStatus(det.id, 'noshow'); this.setState({ detailId: null }); },
+          onReopen: () => setStatus(det.id, 'booked') };
+      })() : { rows: [] },
+    };
+  }
+}
+</script>
+</body>
+</html>
