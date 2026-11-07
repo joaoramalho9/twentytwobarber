@@ -155,7 +155,7 @@
             <div style="font-size:14px;color:#9a9ca0">{{ todayLabel }}</div>
             <div style="font:800 40px/1 'Barlow Condensed',sans-serif;text-transform:uppercase;margin-top:2px">Olá, {{ firstName }}</div>
           </div>
-          <img src="assets/logo.png" alt="" style="width:48px;height:48px;border-radius:50%;border:1px solid #26282b">
+          <button onClick="{{ goProfileTop }}" aria-label="O meu perfil" style="display:flex;align-items:center;gap:8px;height:48px;padding:0 6px 0 14px;border-radius:24px;border:1px solid #26282b;background:#111214;color:#f4f4f2;cursor:pointer"><span style="font-size:14px;font-weight:600">Perfil</span><span style="width:36px;height:36px;border-radius:50%;background:#e8f23a;color:#000;display:flex;align-items:center;justify-content:center;font:800 18px 'Barlow Condensed',sans-serif">{{ clientInitial }}</span></button>
         </div>
 
         <sc-if value="{{ hasNext }}" hint-placeholder-val="{{ true }}">
@@ -1124,6 +1124,7 @@ class Component extends DCLogic {
       phoneHintColor: left === 0 ? Y : MUTED,
       detailsInvalid, detailsBtnBg: detailsInvalid ? '#1c1d1f' : Y, detailsBtnFg: detailsInvalid ? '#55575b' : '#000',
       finishOnb: () => { this.setState({ onb: null }); if ('Notification' in window && Notification.permission === 'default') Notification.requestPermission().then(p => this.setState({ perm: p })).catch(() => {}); },
+      goProfileTop: () => this.setState({ view: 'profile' }), clientInitial: (s.name.trim() || 'C')[0].toUpperCase(),
       isHome: client && !s.onb && s.view === 'home', isBookings: client && !s.onb && s.view === 'bookings',
       isFlow: client && !s.onb && s.view === 'flow', isDone: client && !s.onb && s.view === 'done', isBarber: !client && s.barberAuth && !s.onb, isLogin: s.onb === 'login',
       bUser: s.bUser, bPass: s.bPass, bErr: s.bErr, bErrBorder: s.bErr ? RED : LINE,
