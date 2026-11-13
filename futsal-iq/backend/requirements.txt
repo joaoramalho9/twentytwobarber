@@ -1,0 +1,11 @@
+# FUTSAL IQ backend — all open-source, no paid APIs
+fastapi>=0.115
+uvicorn[standard]>=0.30
+python-multipart>=0.0.9
+numpy>=1.26
+scipy>=1.11
+opencv-python-headless>=4.9
+ultralytics>=8.3        # YOLO (AGPL-3.0) + built-in ByteTrack
+lap>=0.5                # linear assignment used by ByteTrack
+yt-dlp>=2024.1          # optional: YouTube import (only for videos you have rights to)
+pytest>=8
